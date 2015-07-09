@@ -22,3 +22,14 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/* ScoreBoard page */
+.score{
+    font-size: 100px;
+    text-align: center;
+}
+
+.profileImage{
+    height: 100px;
+}
