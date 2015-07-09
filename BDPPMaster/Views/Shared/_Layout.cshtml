@@ -17,13 +17,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("BDPPMaster", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Play", "About", "Home")</li>
-                    <li>@Html.ActionLink("Rankings", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Rankings", "Rankings", "Home")</li>
+                    <li>@Html.ActionLink("Player Board", "PlayerBoard", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

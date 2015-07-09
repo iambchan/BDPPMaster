@@ -20,6 +20,20 @@ namespace BDPPMaster.Controllers
             return View();
         }
 
+        public ActionResult Rankings()
+        {
+            ViewBag.Message = "Rankings";
+
+            return View();
+        }
+
+        public ActionResult PlayerBoard()
+        {
+            ViewBag.Message = "Player Board";
+
+            return View();
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
