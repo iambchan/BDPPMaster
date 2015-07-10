@@ -1,7 +1,30 @@
 ﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+    ViewBag.Title = "Leader Board";
 
-<p>Use this area to provide additional information.</p>
+
+}
+<h2>@ViewBag.Title</h2>
+
+<div class=".container-fluid">
+    <div class="row">
+        <div class="mostWon col-md-6">
+            @Html.Action("mostGamesWon")
+        </div>
+
+        <div class="PercentGamesWon col-md-6">
+            @Html.Action("percentGamesWon")
+        </div>
+
+
+    </div>
+
+
+    <div class="row">
+        <div class="GamesPlayed col-md-6">
+            @Html.Action("numGamesPlayed")
+        </div>
+        <div class="timePlayed col-md-6">
+            @Html.Action("timePlayed")
+        </div>
+    </div>
+</div>

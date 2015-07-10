@@ -23,6 +23,20 @@ textarea {
     max-width: 280px;
 }
 
+h2,
+h3{
+    text-align: center;
+    color: coral;
+}
+
+/* Index */
+
+.beginButton{
+    font-size: 45px;
+}
+
+/* Index end */
+
 
 /* ScoreBoard page */
 .score{
@@ -33,3 +47,77 @@ textarea {
 .profileImage{
     height: 100px;
 }
+
+.playerContainer{
+    background-color: coral;
+    padding: 10px;
+    margin: 0;
+}
+
+.center{
+    text-align: center;
+}
+
+.score input{
+    border-style: none;
+    width: 150px;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.timer{
+    font-size: 45px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.panel{
+    border: solid;
+    border-width: thin;
+    border-color: coral;
+    padding: 15px;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+body{
+    background-image: url("/Content/images/table-tennis-background-copy.jpg");
+    background-size: cover;
+}
+
+.scoreboard__button{
+  padding: 20px;
+  background-color: white;
+  border: solid;
+  border-color: coral;
+}
+
+
+.scoreboard__button:hover{
+    background-color: coral;
+    color: white;
+}
+
+.score_incdec{
+    width: 40px;
+}
+
+.incdec_container{
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+tr{
+    background-color: #FFC864;
+}
+.table-title{
+    font-weight: bold;
+}
+
+
+/* game Options section*/
+.screenName{
+    color: white;
+}
+
+/* game Options section end */
+

@@ -3,37 +3,87 @@
 }
 <h2>@ViewBag.Message</h2>
 
-<p></p>
-
 <div class="row">
-    <div class="col-sm-6">
-        <div class="row">
-            <div class="col-sm-6">
-                <div><img class="profileImage" src="~/Content/images/woman.jpg" /></div>
-            </div>
-            <div class="col-sm-6">
-             <p> Name: Bessie Chan</p>
-             <p> Rank: 1/10</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="row">
-            <div class="col-sm-6">
-                <div><img class="profileImage" src="~/Content/images/jeff.jpg" /></div>
-            </div>
-            <div class="col-sm-6">
-                <p> Name: Bob Chan</p>
-                <p> Rank: 1/10</p>
-            </div>
-        </div>
-    </div>
-    <div class="score col-sm-6" contenteditable="true">
-        0
-    </div>
-    <div class="score col-sm-6" contenteditable="true">
-        0
+    <div class="timer col-xs-12">
+        <p>00:00</p>
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="panel row">
+            <div class=" col-xs-12">
+                <div class="playerContainer row">
+                    <div class="col-xs-6">
+                        <div><img class="profileImage" src="~/Content/images/woman.jpg" /></div>
+                    </div>
+                    <div class="col-xs-6">
+                        <p> <b>Name:</b> Bessie Chan</p>
+                        <p> <b>Rank:</b> 1/10</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="score col-xs-9">
+                        <input class="team1Score" type="number" min="0" max="20" value="0" />
+                    </div>
+                    <div class="score incdec_container col-xs-3">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="incTeam1 score_incdec">+</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="decTeam1 score_incdec">-</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel row">
+            <div class=" col-xs-12">
+                <div class="playerContainer row">
+                    <div class="col-xs-4">
+                        <div><img class="profileImage" src="~/Content/images/jeff.jpg" /></div>
+                    </div>
+                    <div class="col-xs-6">
+                        <p> <b>Name:</b> Bob Chan</p>
+                        <p> <b>Rank:</b> 1/10</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="score col-xs-9">
+                        <input class="team2Score" type="number" min="0" max="20" value="0" />
+                    </div>
+                    <div class="score incdec_container col-xs-3">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="incTeam2 score_incdec">+</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="decTeam2 score_incdec">-</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<div class="row">
+    <div class="center col-xs-6">
+        <button class="scoreboard__button" id="resetButton">Reset Scores</button>
+    </div>
+    <div class="center col-xs-6">
+        <button class="scoreboard__button" id="finishGame">Finish game</button>
+    </div>
+</div>
+
 
 
