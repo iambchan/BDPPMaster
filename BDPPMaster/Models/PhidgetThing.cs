@@ -1,5 +1,4 @@
 ﻿using System;
-using Phidget21COM;
 using Phidgets;
 using Phidgets.Events;
 
