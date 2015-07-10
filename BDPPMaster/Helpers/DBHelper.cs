@@ -220,6 +220,45 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
+
+        public static List<Player> GetPlayersTop(int Num) {
+            var players = new List<Player>();
+            var query = @"SELECT Top @Num *
+                          FROM [Players] p
+                          INNER JOIN [Teams] t ON p.PlayerId IN (t.Player1_id, t.Player2_id)
+                          INNER JOIN [Games] g ON t.TeamId IN (g.Team1_id, g.Team2_id)
+                          WHERE 
+                          (g.Team1_score > g.Team2_score AND p.PlayerId IN (t.Player1_id, t.Player2_id))
+                          OR 
+                          (g.Team2_score > g.Team1_score AND p.PlayerId IN (t.Player1_id, t.Player2_id))";
+            using (var connection = new SqlConnection(_bdppmasterdb))
+            {
+                using (var command = new SqlCommand(query.ToString(), connection))
+                {
+                    command.Parameters.AddWithValue("@Num", Num);
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (!reader.HasRows) { return null; }
+                        while (reader.Read())
+                        {
+                            players.Add(new Player()
+                            {
+                                PlayerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
+                                FirstName = reader["FirstName"].ToString(),
+                                LastName = reader["LastName"].ToString(),
+                                ScreenName = reader["screenName"].ToString(),
+                                BDLoginName = reader["BDLoginName"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                RFID = reader["RFID"].ToString(),
+                                ImageNameWithExt = reader["ImageNameWithExt"].ToString()
+                            });
+                        }
+                        return players;
+                    }
+                }
+            }
+        }
         #endregion
 
         #region CREATE

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BDPPMaster.Models;
+using BDPPMaster.Helpers;
 
 namespace BDPPMaster.Controllers
 {
@@ -201,37 +202,7 @@ namespace BDPPMaster.Controllers
         
         public ActionResult GameOptions()
         {
-
-            List<Player> players = new List<Player>();
-
-            Player p1 = new Player();
-            p1.ScreenName = "p1";
-            p1.GamesPlayed = 10;
-            p1.GamesWon = 7;
-            p1.Avatar = "jeff.jpg";
-
-            Player p2 = new Player();
-            p2.ScreenName = "p2";
-            p2.GamesPlayed = 12;
-            p2.GamesWon = 7;
-            p2.Avatar = "jeff.jpg";
-            Player p3 = new Player();
-            p3.ScreenName = "p3";
-            p3.GamesPlayed = 0;
-            p3.GamesWon = 7;
-            p3.Avatar = "woman.jpg";
-            Player p4 = new Player();
-            p4.ScreenName = "p4";
-            p4.GamesPlayed = 13;
-            p4.GamesWon = 7;
-            p4.Avatar = "woman.jpg";
-            players.Add(p1);
-            players.Add(p2);
-            players.Add(p3);
-            players.Add(p4);
-            ViewBag.Message = "fbghfhytyh";
-
-
+            List<Player> players = DBHelper.GetAllPlayers();
             return View(players);
         }
 
