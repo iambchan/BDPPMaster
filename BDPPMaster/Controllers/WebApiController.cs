@@ -123,6 +123,14 @@ namespace BDPPMaster.Controllers
             if (players == null) { return NotFound(); }
             return Ok(players);
         }
+        [Route("api/Get/Player/Top/{Num:int}")]
+        public IHttpActionResult GetPlayersTop(int Num) 
+        {
+            if (!ModelState.IsValid) { return BadRequest(); }
+            var players = DBHelper.GetPlayersTop(Num);
+            if (players == null) { return NotFound(); }
+            return Ok(players);
+        }
         [Route("api/Get/Team/{TeamId:int}")]
         public IHttpActionResult GetTeamInfo(int TeamId)
         {
