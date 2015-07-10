@@ -58,6 +58,10 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Phidget21.NET1.1, Version=2.1.8.0, Culture=neutral, PublicKeyToken=c2b1f2a3594bce52">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files\Phidgets\Phidget21.NET1.1.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -199,6 +203,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\jeff.jpg" />
+    <Content Include="Content\images\table-tennis-background-copy.jpg" />
     <Content Include="Content\images\woman.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -273,6 +278,10 @@
     <Content Include="Views\Home\Rankings.cshtml" />
     <Content Include="Views\Home\ScoreBoard.cshtml" />
     <Content Include="Views\Home\PlayerBoard.cshtml" />
+    <Content Include="Views\Home\_mostGamesWon.cshtml" />
+    <Content Include="Views\Home\_percentGamesWon.cshtml" />
+    <Content Include="Views\Home\_numGamesPlayed.cshtml" />
+    <Content Include="Views\Home\_timePlayed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
