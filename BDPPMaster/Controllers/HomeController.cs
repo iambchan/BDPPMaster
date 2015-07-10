@@ -187,12 +187,12 @@ namespace BDPPMaster.Controllers
         }
 
         // Todo pass in team ids 
-       // public ActionResult ScoreBoard(int idp1, string imagep1, string namep1, int idp2, string imagep2, string namep2)
-    public ActionResult ScoreBoard()    
+     public ActionResult ScoreBoard(int idp1, string imagep1, string namep1, int idp2, string imagep2, string namep2)
+    //public ActionResult ScoreBoard()    
     {
             ViewBag.Message = "ScoreBoard";
-            //List<Player> players = new List<Player>(){new Player(){PlayerId = idp1, Avatar = imagep1, ScreenName = namep1}, new Player(){PlayerId = idp2, Avatar = imagep2, ScreenName = namep2}};
-            return View();
+            List<Player> players = new List<Player>(){new Player(){PlayerId = idp1, ImageNameWithExt = imagep1, ScreenName = namep1}, new Player(){PlayerId = idp2, ImageNameWithExt = imagep2, ScreenName = namep2}};
+            return View(players);
         }
 [HttpGet]
         public ActionResult Hello()
