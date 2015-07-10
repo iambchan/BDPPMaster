@@ -7,9 +7,10 @@ USE bdppmasterdb;
 --find player
 SELECT * FROM [Players] WHERE ScreenName LIKE '%Guest%' OR BDLoginName LIKE '%Guest%';
 
---create new player
+--create new player & return player
 INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email, RFID)
-VALUES ('One', 'Guest', 'Guest1', 'bdppGuest1', 'bdppGuest1@bd.com', '');
+Output Inserted.*
+VALUES ('Six', 'Guest', 'Guest6', 'bdppGuest6', 'bdppGuest6@bd.com', '');
 
 --update existing player
 UPDATE [Players]
