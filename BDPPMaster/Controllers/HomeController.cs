@@ -42,6 +42,7 @@ namespace BDPPMaster.Controllers
             return View();
         }
 
+        // Todo pass in team ids 
         public ActionResult ScoreBoard()
         {
             ViewBag.Message = "ScoreBoard";

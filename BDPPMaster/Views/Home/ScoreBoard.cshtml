@@ -3,37 +3,62 @@
 }
 <h2>@ViewBag.Message</h2>
 
-<p></p>
-
 <div class="row">
-    <div class="col-sm-6">
-        <div class="row">
-            <div class="col-sm-6">
-                <div><img class="profileImage" src="~/Content/images/woman.jpg" /></div>
-            </div>
-            <div class="col-sm-6">
-             <p> Name: Bessie Chan</p>
-             <p> Rank: 1/10</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="row">
-            <div class="col-sm-6">
-                <div><img class="profileImage" src="~/Content/images/jeff.jpg" /></div>
-            </div>
-            <div class="col-sm-6">
-                <p> Name: Bob Chan</p>
-                <p> Rank: 1/10</p>
-            </div>
-        </div>
-    </div>
-    <div class="score col-sm-6" contenteditable="true">
-        0
-    </div>
-    <div class="score col-sm-6" contenteditable="true">
-        0
+    <div class="timer col-xs-12">
+        <p>00:00</p>
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div><img class="profileImage" src="~/Content/images/woman.jpg" /></div>
+                    </div>
+                    <div class="col-xs-6">
+                        <p> Name: Bessie Chan</p>
+                        <p> Rank: 1/10</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="score col-xs-12">
+                        <input type="number" min="0" max="20" value="0" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div><img class="profileImage" src="~/Content/images/jeff.jpg" /></div>
+                    </div>
+                    <div class="col-xs-6">
+                        <p> Name: Bob Chan</p>
+                        <p> Rank: 1/10</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="score col-xs-12">
+                        <input type="number" min="0" max="20" value="0" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="center col-xs-6">
+        <button id="resetButton">Reset Scores</button>
+    </div>
+    <div class="center col-xs-6">
+        <button id="finishGame">Finish game</button>
+    </div>
+</div>
+
 
 
