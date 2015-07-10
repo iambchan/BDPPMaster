@@ -1,9 +1,8 @@
 ﻿var startDateTime = new Date();
 var team1_Id = 1;
 var team2_Id = 2;
+var p1;
 
-
-);
 
 function helloClicked() {
 
@@ -12,12 +11,13 @@ function helloClicked() {
         dataType: 'html',
         type: 'get',
         success: function (data, textStatus, jQxhr) {
-           
+
         },
         error: function (jqXhr, textStatus, errorThrown) {
-           
+
         }
-    });
+    })
+};
 
 $(document).ready(function () {
     bindButtons();
@@ -67,6 +67,23 @@ function bindButtons(){
         var team2Score = getScore(2);
         if (team2Score > 0) $('.team2Score')[0].value = team2Score - 1;
     });
+
+    $('.addP1__button').click(function(){
+        // hide current item
+        // show all add p2 buttons
+        var p1Buttons = $('.addP1__button');
+        var p2Buttons = $('.addP2__button');
+        p1 = $(this).attr('data-playerid');
+
+        p1Buttons.map(function (b) { $(p1Buttons[b]).hide(); });
+        p2Buttons.map(function (b) { $(p2Buttons[b]).show(); });
+
+    });
+    $('.addP2__button').click(function () {
+        // save player 2 data and call controller
+        var p2 = $(this).attr('data-playerid');
+        location.href = '/home/scoreboard?p1=' + p1 + '&p2='+ p2;
+    });
 }
 
 function incrementTime(){
@@ -104,4 +121,36 @@ function finishGame() {
     //console.log(finishGameData);
     // Post request to add game to database
 
+}
+
+function beginGame() {
+    var jsonPlayers;
+
+
+    $.ajax({
+        url: "/api/Get/Player/All",
+        dataType: 'json',
+        type: 'get',
+        contentType: 'application/json',
+        success: function (data, textStatus, jQxhr) {
+            jsonPlayers = data;
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            alert("error");
+        }
+    });
+
+    $.ajax({
+        url: requestUrl,
+        dataType: 'html',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(requestModel),
+        success: function (data, textStatus, jQxhr) {
+            toastr["success"]("Successfully changed.", featureKey);
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            toastr["error"]("Feature Toggle was not changed.", featureKey);
+        }
+    });
 }

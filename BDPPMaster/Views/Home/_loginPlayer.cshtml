@@ -3,4 +3,6 @@
 <div class="col-xs-3 loginPlayer center">
     <img class="profileImage" src="@Url.Content("~/Content/images/" + @Model.Avatar)" /><br />
     <div class="screenName">@Model.ScreenName</div>
+    <button data-playerId=@Model.PlayerId class="addP1__button">Add as Player 1</button>
+    <button data-playerid=@Model.PlayerId class ="addP2__button">Add as Player 2</button>
 </div>
