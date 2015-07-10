@@ -23,7 +23,8 @@ textarea {
     max-width: 280px;
 }
 
-h2{
+h2,
+h3{
     text-align: center;
     color: coral;
 }
@@ -81,3 +82,26 @@ body{
   border: solid;
   border-color: coral;
 }
+
+
+.scoreboard__button:hover{
+    background-color: coral;
+    color: white;
+}
+
+.score_incdec{
+    width: 40px;
+}
+
+.incdec_container{
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+tr{
+    background-color: #FFC864;
+}
+.table-title{
+    font-weight: bold;
+}
+

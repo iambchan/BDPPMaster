@@ -8,8 +8,15 @@ $(document).ready(function () {
 });
 
 
+function getScore(teamNum) {
+    if (teamNum == 1) {
+        return parseInt($('.team1Score')[0].value);
+    }
+    else return parseInt($('.team2Score')[0].value);
+}
+
 function bindButtons(){
-    $('.score').click(function () {
+    $('.score input').click(function () {
         document.execCommand('selectAll', false, null);
     });
 
@@ -22,6 +29,26 @@ function bindButtons(){
 
     $('#finishGame').click(function () {
         finishGame();
+    });
+
+    $('.incTeam1').click(function () {
+        var team1Score = getScore(1);
+        if (team1Score < 30) $('.team1Score')[0].value = team1Score + 1;
+    });
+
+    $('.decTeam1').click(function () {
+        var team1Score = getScore(1);
+        if(team1Score > 0) $('.team1Score')[0].value = team1Score - 1;
+    });
+
+    $('.incTeam2').click(function () {
+        var team2Score = getScore(2);
+        if (team2Score < 30) $('.team2Score')[0].value = team2Score + 1;
+    });
+
+    $('.decTeam2').click(function () {
+        var team2Score = getScore(2);
+        if (team2Score > 0) $('.team2Score')[0].value = team2Score - 1;
     });
 }
 
