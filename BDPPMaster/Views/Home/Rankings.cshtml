@@ -3,19 +3,15 @@
 
 
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
+<h2>@ViewBag.Title</h2>
 
 <div class=".container-fluid">
     <div class="row">
         <div class="mostWon col-md-6">
-            Most Games Won
             @Html.Action("mostGamesWon")
         </div>
 
         <div class="PercentGamesWon col-md-6">
-            % Games Won
             @Html.Action("percentGamesWon")
         </div>
 
@@ -25,11 +21,9 @@
 
     <div class="row">
         <div class="GamesPlayed col-md-6">
-            Most Games Played
             @Html.Action("numGamesPlayed")
         </div>
         <div class="timePlayed col-md-6">
-            Most Time Played
             @Html.Action("timePlayed")
         </div>
     </div>

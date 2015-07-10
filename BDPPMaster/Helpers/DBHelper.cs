@@ -144,11 +144,53 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
+//        public static Game GetGameInfo(int GameId) 
+//        {
+//            var team = new Team();
+//            var query = @"SELECT t.TeamId, p.* 
+//                          FROM [Teams] t
+//                          INNER JOIN [Players] p
+//                          ON p.PlayerId IN (t.Player1_Id, t.Player2_Id)
+//                          WHERE t.TeamId = @TeamId;";
+//            using (var connection = new SqlConnection(_bdppmasterdb))
+//            {
+//                using (var command = new SqlCommand(query, connection))
+//                {
+//                    command.Parameters.AddWithValue("@TeamId", TeamId);
+//                    connection.Open();
+//                    using (var reader = command.ExecuteReader())
+//                    {
+//                        if (!reader.HasRows) { return null; }
+//                        while (reader.Read())
+//                        {
+//                            team.TeamId = reader.GetInt32(reader.GetOrdinal("TeamId")); //TeamId is constant, overwrite is not a concern
+//                            var player = new Player()
+//                            {
+//                                PlayerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
+//                                FirstName = reader["FirstName"].ToString(),
+//                                LastName = reader["LastName"].ToString(),
+//                                ScreenName = reader["screenName"].ToString(),
+//                                BDLoginName = reader["BDLoginName"].ToString(),
+//                                Email = reader["Email"].ToString(),
+//                                RFID = reader["RFID"].ToString()
+//                            };
+
+//                            //if (!reader["ProfileImage"].Equals(DBNull.Value)) { 
+//                            //    //process image here
+//                            //}
+
+//                            team.Players.Add(player);
+//                        }
+//                        return team;
+//                    }
+//                }
+//            }
+//        }
         #endregion
 
         #region CREATE
         //required, all of: FirstName, LastName, ScreenName, BDLoginName, Email
-        public static Player CreateNewPlayer(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID)
+        public static Player CreateNewPlayer(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID) //returns int PlayerId
         {
             var query = @"INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email, RFID)
                           OUTPUT Inserted.PlayerId
@@ -199,6 +241,24 @@ namespace BDPPMaster.Helpers
                     connection.Open();
                     var teamId = Convert.ToInt32(command.ExecuteScalar());
                     return teamId;
+                }
+            }
+        }
+        public static int CreateNewGame(int Team1_id, int Team2_id) //returns int GameId
+        {
+            var query = @"INSERT INTO [Games] (Team1_id, Team2_id, StartDateTime) 
+                          OUTPUT Inserted.GameId
+                          VALUES (@Team1_id, @Team2_id, @StartDateTime);";
+            using (var connection = new SqlConnection(_bdppmasterdb))
+            {
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Team1_id", Team1_id);
+                    command.Parameters.AddWithValue("@Team2_id", Team2_id);
+                    command.Parameters.AddWithValue("@StartDateTime", DateTime.Now);
+                    connection.Open();
+                    var gameId = Convert.ToInt32(command.ExecuteScalar());
+                    return gameId;
                 }
             }
         }

@@ -84,6 +84,7 @@ namespace BDPPMaster.Controllers
             p2.ScreenName = "p2";
             p2.GamesPlayed = 12;
             p2.GamesWon = 7;
+
             Player p3 = new Player();
             p3.ScreenName = "p3";
             p3.GamesPlayed = 0;
@@ -118,6 +119,7 @@ namespace BDPPMaster.Controllers
             p2.ScreenName = "p2";
             p2.GamesPlayed = 12;
             p2.GamesWon = 7;
+
             Player p3 = new Player();
             p3.ScreenName = "p3";
             p3.GamesPlayed = 0;
@@ -142,7 +144,6 @@ namespace BDPPMaster.Controllers
             // var partialViewModel = new PartialViewModel(model);
 
             List<Player> players = new List<Player>();
-
             Player p1 = new Player();
             p1.ScreenName = "p1";
             p1.GamesPlayed = 10;
