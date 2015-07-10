@@ -73,7 +73,8 @@ function bindButtons(){
         // show all add p2 buttons
         var p1Buttons = $('.addP1__button');
         var p2Buttons = $('.addP2__button');
-        p1 = $(this).attr('data-playerid');
+        p1 = { id: $(this).attr('data-playerid'), image: $(this).attr('data-avatar'), name: $(this).attr('data-username') };
+       // p1 = $(this).attr('data-playerid');
 
         p1Buttons.map(function (b) { $(p1Buttons[b]).hide(); });
         p2Buttons.map(function (b) { $(p2Buttons[b]).show(); });
@@ -82,8 +83,36 @@ function bindButtons(){
     $('.addP2__button').click(function () {
         // save player 2 data and call controller
         var p2 = $(this).attr('data-playerid');
-        location.href = '/home/scoreboard?p1=' + p1 + '&p2='+ p2;
+       // location.href = '/home/scoreboard?p1=' + p1 + '&p2=' + p2;
+        var p2 = { id: $(this).attr('data-playerid'), image: $(this).attr('data-avatar'), name: $(this).attr('data-username') };
+        var requestModel = { idp1: p1.id, imagep1: p1.image, namep1: p1.name, idp2: p2.id, imagep2: p2.image, namep2: p2.name };
+
+        $.post({
+            url: "/home/ScoreBoard",
+            dataType: 'html',
+            type: 'post',
+            contentType: 'application/json',
+            data: JSON.stringify(requestModel),
+            success: function (data, textStatus, jQxhr) {
+                alert("success");
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("error")
+            }
+        });
     });
+}
+
+function checkIfTwoPlayersSelected() {
+    var visiblePlayers = $('.loginPlayer:visible');
+    if (visiblePlayers.length === 2) {
+        var player1 = $(visiblePlayers[0]);
+        var player2 = $(visiblePlayers[1]);
+        $('[name=idp1').val(player1.attr('data-player-id'));
+        $('[name=idp2').val(player2.attr('data-player-id'));
+
+        $('#playerForm').submit();
+    }
 }
 
 function incrementTime(){

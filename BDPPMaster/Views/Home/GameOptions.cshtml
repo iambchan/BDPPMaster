@@ -7,11 +7,47 @@
 
 
 
-@*<div class="row">
+<div class="row">
         @foreach (var player in Model)
         {
             Html.RenderPartial("_loginPlayer", player);
         }
-</div>*@
 
-<button onclick="helloClicked()">Hello</button>
+</div>
+
+<form id="playerForm" method="post" action="/Home/Scoreboard">
+    <input type="hidden" name="idp1" />
+    <input type="hidden" name="imagep1" />
+    <input type="hidden" name="namep1" />
+    <input type="hidden" name="idp2" />
+    <input type="hidden" name="imagep2" />
+    <input type="hidden" name="namep2" />
+</form>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/SignalR/Hubs"></script>
+
+    <script>
+        $(function () {
+            // Declare a proxy to reference the hub. 
+            var chat = $.connection.pPHub;
+            // Create a function that the hub can call to broadcast messages.
+            chat.client.addPlayer = function (rfid) {
+                console.log(rfid);
+                var player = $('.loginPlayer[data-player-rfid="' + rfid + '"]');
+                if (player.length) {
+                    player.show();
+                }
+            };
+
+            $.connection.hub.start().done(function () {
+            });
+        });
+    </script>
+}
+
+
+
+
+
