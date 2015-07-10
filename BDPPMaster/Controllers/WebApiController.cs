@@ -110,14 +110,6 @@ namespace BDPPMaster.Controllers
             return Ok(player);
         }
 
-        [Route("api/Get/Player/ByRFID")]
-        public IHttpActionResult GetPlayerInfoByRFID(string RFID)
-        {
-            if (!ModelState.IsValid) { return BadRequest(); }
-            if (String.IsNullOrEmpty(RFID)) { return NotFound(); }
-
-            return Ok(PhidgetThing.doPhidgetThings());
-        }
 
         [Route("api/Get/Player/Id")]
         public IHttpActionResult GetPlayerIdByScreenLoginNames(string ScreenName, string BDLoginName)
