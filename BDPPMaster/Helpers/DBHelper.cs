@@ -14,7 +14,6 @@ namespace BDPPMaster.Helpers
         private static readonly string _bdppmasterdb = ConfigurationManager.ConnectionStrings["bdppmasterdb"].ConnectionString;
 
         #region GET
-        //required, one of: FirstName, LastName, ScreenName, BDLoginName, Email
         public static int GetPlayerIdByScreenLoginNames(string ScreenName, string BDLoginName) {
             var query = "SELECT PlayerId FROM [Players] WHERE ScreenName = @ScreenName OR BDLoginName = @BDLoginName";
             using (var connection = new SqlConnection(_bdppmasterdb))
@@ -59,6 +58,7 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
+        //required, one of: FirstName, LastName, ScreenName, BDLoginName, Email, RFID
         public static Player GetPlayerInfo(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID) {
             var queryParams = new StringBuilder();
             #region Append Conditions
@@ -384,56 +384,6 @@ namespace BDPPMaster.Helpers
 //            }
 //        }
         #endregion
-
-   //     // Set the connection, command, and then execute the command with non query.
-   //   public static Int32 ExecuteNonQuery(String connectionString, String commandText,
-   //       CommandType commandType, params SqlParameter[] parameters) {
-   //      using (SqlConnection conn = new SqlConnection(connectionString)) {
-   //         using (SqlCommand cmd = new SqlCommand(commandText, conn)) {
-   //            // There're three command types: StoredProcedure, Text, TableDirect. The TableDirect 
-   //            // type is only for OLE DB.  
-   //            cmd.CommandType = commandType;
-   //            cmd.Parameters.AddRange(parameters);
-
-   //            conn.Open();
-   //            return cmd.ExecuteNonQuery();
-   //         }
-   //      }
-   //   }
-
-   //   // Set the connection, command, and then execute the command and only return one value.
-   //   public static Object ExecuteScalar(String connectionString, String commandText,
-   //       CommandType commandType, params SqlParameter[] parameters) {
-   //      using (SqlConnection conn = new SqlConnection(connectionString)) {
-   //         using (SqlCommand cmd = new SqlCommand(commandText, conn)) {
-   //            cmd.CommandType = commandType;
-   //            cmd.Parameters.AddRange(parameters);
-
-   //            conn.Open();
-   //            return cmd.ExecuteScalar();
-   //         }
-   //      }
-   //   }
-
-   //   // Set the connection, command, and then execute the command with query and return the reader.
-   //   public static SqlDataReader ExecuteReader(String connectionString, String commandText,
-   //       CommandType commandType, params SqlParameter[] parameters) {
-   //      SqlConnection conn = new SqlConnection(connectionString);
-
-   //      using (SqlCommand cmd = new SqlCommand(commandText, conn)) {
-   //         cmd.CommandType = commandType;
-   //         cmd.Parameters.AddRange(parameters);
-
-   //         conn.Open();
-   //         // When using CommandBehavior.CloseConnection, the connection will be closed when the 
-   //         // IDataReader is closed.
-   //         SqlDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-   //         return reader;
-   //      }
-   //   }
-   //}
-
         #region UPDATE
         #endregion
     }
