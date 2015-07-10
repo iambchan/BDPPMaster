@@ -4,19 +4,20 @@
 }
 
 @{
-    List<BDPPMaster.Models.Player> players = Model.OrderByDescending(o => o.percentWon()).ToList();
+    List<BDPPMaster.Models.Player> players = Model.OrderByDescending(o => o.PercentWon()).ToList();
 }
+<h3>@ViewBag.Title</h3>
 <table class="table table-bordered table-striped">
     <tr>
         <td>User</td>
-        <td>Games Won</td>
+        <td>% Games Won</td>
     </tr>
 
     @foreach (var player in players)
     {
         <tr>
-            <td>@player.screenName</td>
-            <td>@player.percentWon()</td>
+            <td>@player.ScreenName</td>
+            <td>@player.PercentWon()</td>
         </tr>
     }
 
