@@ -7,6 +7,7 @@ using BDPPMaster.Models;
 using BDPPMaster.Helpers;
 using Microsoft.AspNet.SignalR;
 using BDPPMaster.Hubs;
+using System.Globalization;
 
 namespace BDPPMaster.Controllers
 {
@@ -187,22 +188,14 @@ namespace BDPPMaster.Controllers
         }
 
         // Todo pass in team ids 
-     public ActionResult ScoreBoard(int idp1, string imagep1, string namep1, int idp2, string imagep2, string namep2)
-    //public ActionResult ScoreBoard()    
-    {
+        public ActionResult ScoreBoard(int idp1, string imagep1, string namep1, int idp2, string imagep2, string namep2)
+        //public ActionResult ScoreBoard()    
+        {
             ViewBag.Message = "ScoreBoard";
-            List<Player> players = new List<Player>(){new Player(){PlayerId = idp1, ImageNameWithExt = imagep1, ScreenName = namep1}, new Player(){PlayerId = idp2, ImageNameWithExt = imagep2, ScreenName = namep2}};
+            List<Player> players = new List<Player>() { new Player() { PlayerId = idp1, ImageNameWithExt = imagep1, ScreenName = namep1 }, new Player() { PlayerId = idp2, ImageNameWithExt = imagep2, ScreenName = namep2 } };
             return View(players);
         }
-[HttpGet]
-        public ActionResult Hello()
-        {
-            ViewBag.Message = "fbghfhytyh";
 
-
-            return View("GameOptions");
-        }
-        
         public ActionResult GameOptions()
         {
             List<Player> players = DBHelper.GetAllPlayers();
@@ -214,6 +207,25 @@ namespace BDPPMaster.Controllers
             var context = GlobalHost.ConnectionManager.GetHubContext<PPHub>();
             context.Clients.All.addPlayer(rfid);
             return Content("hi cassandra");
+        }
+        public ActionResult EndGame(string ScreenLoginName1, string ScreenLoginName2, string StartDateTimeString, string EndDateTimeString, int Team1_Score = 0, int Team2_Score = 0)
+        {
+            var player1_Id = DBHelper.GetPlayerIdByScreenLoginNames(ScreenLoginName1, ScreenLoginName1);
+            var player2_Id = DBHelper.GetPlayerIdByScreenLoginNames(ScreenLoginName2, ScreenLoginName2);
+
+            var team1_Id = DBHelper.CreateNewTeam(player1_Id);
+            var team2_Id = DBHelper.CreateNewTeam(player2_Id);
+
+            DateTime dt = new DateTime();
+
+            DateTime StartDateTime = dt;
+            DateTime EndDateTime = dt;
+
+            var game_Id = DBHelper.CreateNewGame(team1_Id, team2_Id, Team1_Score, Team2_Score, StartDateTime, EndDateTime);
+
+
+            return View("Index");
+
         }
 
     }

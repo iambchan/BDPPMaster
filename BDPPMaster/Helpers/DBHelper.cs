@@ -328,18 +328,29 @@ namespace BDPPMaster.Helpers
         }
         public static int CreateNewTeam(int Player1_Id, int Player2_Id = 0) //returns int TeamId
         {
-            var query = @"INSERT INTO [Teams] (Player1_Id, Player2_Id) 
+            var query = string.Empty;
+            if (Player2_Id == 0) {
+                query = @"INSERT INTO [Teams] (Player1_Id) 
+                          OUTPUT Inserted.TeamId
+                          VALUES (@Player1_Id);";
+            }
+            else {
+                query = @"INSERT INTO [Teams] (Player1_Id, Player2_Id) 
                           OUTPUT Inserted.TeamId
                           VALUES (@Player1_Id, @Player2_Id);";
+            }
+
             using (var connection = new SqlConnection(_bdppmasterdb))
             {
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Player1_Id", Player1_Id);
-                    command.Parameters.AddWithValue("@Player2_Id", Player2_Id);
+                    if (Player2_Id > 0) {
+                        command.Parameters.AddWithValue("@Player2_Id", Player2_Id);
+                    }
                     connection.Open();
-                    var teamId = Convert.ToInt32(command.ExecuteScalar());
-                    return teamId;
+                    command.ExecuteNonQuery();
+                    return 1;
                 }
             }
         }
@@ -354,11 +365,10 @@ namespace BDPPMaster.Helpers
                 {
                     command.Parameters.AddWithValue("@Team1_Id", Team1_Id);
                     command.Parameters.AddWithValue("@Team2_Id", Team2_Id);
-                    command.Parameters.AddWithValue("@Team1_Id", Team1_Id);
-                    command.Parameters.AddWithValue("@Team2_Id", Team2_Id);
-                    command.Parameters.AddWithValue("@Team1_Id", Team1_Id);
-                    command.Parameters.AddWithValue("@Team2_Id", Team2_Id);
-                    command.Parameters.AddWithValue("@StartDateTime", DateTime.Now);
+                    command.Parameters.AddWithValue("@Team1_Score", Team1_Score);
+                    command.Parameters.AddWithValue("@Team2_Score", Team2_Score);
+                    command.Parameters.AddWithValue("@StartDateTime", DateTime.Now.AddMinutes(-10));
+                    command.Parameters.AddWithValue("@EndDateTime", DateTime.Now);
                     connection.Open();
                     var gameId = Convert.ToInt32(command.ExecuteScalar());
                     return gameId;

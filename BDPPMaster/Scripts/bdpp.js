@@ -1,4 +1,4 @@
-﻿var startDateTime = new Date();
+﻿var StartDateTime = new Date();
 var team1_Id = 1;
 var team2_Id = 2;
 var p1;
@@ -22,6 +22,10 @@ function helloClicked() {
 $(document).ready(function () {
     bindButtons();
     incrementTime();
+
+    var date = new Date();
+    var startDateTimeString = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    $('[name=StartDateTime').val(startDateTimeString);
 });
 
 
@@ -44,8 +48,13 @@ function bindButtons(){
         scores[1].value = 0;
     });
 
-    $('#finishGame').click(function () {
-        finishGame();
+    $('#finishGame').submit(function () {
+        $('[name=Team1_Score').val($('.team1Score').val());
+        $('[name=Team2_Score').val($('.team2Score').val());
+
+        var date = new Date();
+        var endDateTimeString = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        $('[name=EndDateTime').val(endDateTimeString);
     });
 
     $('.incTeam1').click(function () {
@@ -141,20 +150,20 @@ function incrementTime(){
     setTimeout(update, 1000);
 }
 
-function finishGame() {
-    var finishGameData = {
-        "startDateTime": startDateTime,
-        "endDateTime": new Date(),
-        "Team1_score": 10,
-        "Team2_score": 10,
-        "Team1_Id": 1,
-        "Team2_Id": 2
-    }
+//function finishGame() {
+//    var finishGameData = {
+//        "startDateTime": startDateTime,
+//        "endDateTime": new Date(),
+//        "Team1_score": 10,
+//        "Team2_score": 10,
+//        "Team1_Id": 1,
+//        "Team2_Id": 2
+//    }
 
-    //console.log(finishGameData);
-    // Post request to add game to database
+//    //console.log(finishGameData);
+//    // Post request to add game to database
 
-}
+//}
 
 function beginGame() {
     var jsonPlayers;

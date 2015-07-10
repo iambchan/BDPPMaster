@@ -10,80 +10,89 @@
         <p>00:00</p>
     </div>
 </div>
-<div class="row">
-    <div class="col-xs-6">
-        <div class="panel row">
-            <div class=" col-xs-12">
-                <div class="playerContainer row">
-                    <div class="col-xs-6">
-                        <div><img class="profileImage" src="@Url.Content("~/Content/images/")@Model[0].ImageNameWithExt" /></div>
-                    </div>
-                    <div class="col-xs-6">
-                        <p> <b>Name:</b> @Model[0].ScreenName</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="score col-xs-9">
-                        <input class="team1Score" type="number" min="0" max="20" value="0" />
-                    </div>
-                    <div class="score incdec_container col-xs-3">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="incTeam1 score_incdec">+</button>
-                            </div>
+
+<form id="FinishGameForm" method="post" Action="/Home/EndGame">
+    <input type="hidden" name="ScreenLoginName1" value="@Model[0].ScreenName"/>
+    <input type="hidden" name="ScreenLoginName2" value="@Model[1].ScreenName"/>
+    <input type="hidden" name="Team1_Score" />
+    <input type="hidden" name="Team2_Score" />
+    <input type="hidden" name="StartDateTimeString"/>
+    <input type="hidden" name="EndDateTimeString" />
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="panel row">
+                <div class=" col-xs-12">
+                    <div class="playerContainer row">
+                        <div class="col-xs-6">
+                            <div><img class="profileImage" src="@Url.Content("~/Content/images/")@Model[0].ImageNameWithExt" /></div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="decTeam1 score_incdec">-</button>
+                        <div class="col-xs-6">
+                            <p> <b>Name:</b> @Model[0].ScreenName</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="score col-xs-9">
+                            <input class="team1Score" type="number" min="0" max="20" value="0" />
+                        </div>
+                        <div class="score incdec_container col-xs-3">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="button" class="incTeam1 score_incdec">+</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="button" class="decTeam1 score_incdec">-</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-xs-6">
-        <div class="panel row">
-            <div class=" col-xs-12">
-                <div class="playerContainer row">
-                    <div class="col-xs-4">
-                        <div><img class="profileImage" src="@Url.Content("~/Content/images/")@Model[1].ImageNameWithExt" /></div>
-                    </div>
-                    <div class="col-xs-6">
-                        <p> <b>Name:</b> @Model[1].ScreenName</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="score col-xs-9">
-                        <input class="team2Score" type="number" min="0" max="20" value="0" />
-                    </div>
-                    <div class="score incdec_container col-xs-3">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="incTeam2 score_incdec">+</button>
-                            </div>
+        <div class="col-xs-6">
+            <div class="panel row">
+                <div class=" col-xs-12">
+                    <div class="playerContainer row">
+                        <div class="col-xs-4">
+                            <div><img class="profileImage" src="@Url.Content("~/Content/images/")@Model[1].ImageNameWithExt" /></div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="decTeam2 score_incdec">-</button>
+                        <div class="col-xs-6">
+                            <p> <b>Name:</b> @Model[1].ScreenName</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="score col-xs-9">
+                            <input class="team2Score" type="number" min="0" max="20" value="0" />
+                        </div>
+                        <div class="score incdec_container col-xs-3">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="button" class="incTeam2 score_incdec">+</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button type="button" class="decTeam2 score_incdec">-</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
 
-</div>
 <div class="row">
     <div class="center col-xs-6">
-        <button class="scoreboard__button" id="resetButton">Reset Scores</button>
+        <button class="scoreboard__button" type="button" id="resetButton">Reset Scores</button>
     </div>
     <div class="center col-xs-6">
-        <button class="scoreboard__button" id="finishGame">Finish game</button>
+        <button type="submit" class="scoreboard__button" id="finishGame">Finish game</button>
     </div>
 </div>
-
+</form>
 
 
