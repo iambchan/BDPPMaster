@@ -259,6 +259,32 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
+        public static List<int> GetPlayersMostGames() {
+            var playerIds = new List<int>();
+            var query = @"SELECT PlayerId
+                          FROM [Players] p
+                          INNER JOIN [Teams] t ON p.PlayerId IN (t.Player1_id, t.Player2_id)
+                          INNER JOIN [Games] g ON t.TeamId IN (g.Team1_id, g.Team2_id)
+                          GROUP BY PlayerId
+                          ORDER BY COUNT(g.GameId) DESC";
+            using (var connection = new SqlConnection(_bdppmasterdb))
+            {
+                using (var command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (!reader.HasRows) { return null; }
+                        while (reader.Read())
+                        {
+                            playerIds.Add(reader.GetInt32(reader.GetOrdinal("PlayerId")));
+                        }
+                        return playerIds;
+                    }
+                }
+            }
+
+        }
         #endregion
 
         #region CREATE

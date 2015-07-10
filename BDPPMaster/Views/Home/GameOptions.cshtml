@@ -5,12 +5,14 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-@*<button onclick="helloClicked()">Hello</button>*@
+
+
 <div class="row">
         @foreach (var player in Model)
         {
             Html.RenderPartial("_loginPlayer", player);
         }
+
 </div>
 
 <form id="playerForm" method="post" action="/Home/Scoreboard">
@@ -44,3 +46,8 @@
         });
     </script>
 }
+
+
+
+
+
