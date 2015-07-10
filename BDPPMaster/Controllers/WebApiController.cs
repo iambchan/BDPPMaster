@@ -10,11 +10,12 @@ namespace BDPPMaster.Controllers
 {
     public class WebApiController : ApiController
     {
+        #region GET
         //required, all of: FirstName, LastName, ScreenName, BDLoginName, Email
+        [Route("api/CreateNewPlayer")]
         public IHttpActionResult CreateNewPlayer(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID)
         {
             if (!ModelState.IsValid) { return BadRequest(); }
-
             var missingItems = new StringBuilder();
             #region Validation (builds missingItems)
             if (FirstName == null)
@@ -44,12 +45,31 @@ namespace BDPPMaster.Controllers
             }
             #endregion
             if (missingItems.Length > 0) { return BadRequest(String.Format("Missing the following information: {0}.", missingItems.ToString())); }
-            
+
             var newPlayer = DBHelper.CreateNewPlayer(FirstName, LastName, ScreenName, BDLoginName, Email, RFID);
             return Ok(newPlayer);
         }
+        [Route("api/CreateNewTeam")]
+        public IHttpActionResult CreateNewTeam(string ScreenLoginName1, string ScreenLoginName2)
+        {
+            if (!ModelState.IsValid) { return BadRequest(); }
+            var player1_Id = DBHelper.GetPlayerIdByScreenLoginNames(ScreenLoginName1, ScreenLoginName1);
+            var teamId = 0;
+            if (ScreenLoginName2 != null)
+            {
+                var player2_Id = DBHelper.GetPlayerIdByScreenLoginNames(ScreenLoginName2, ScreenLoginName2);
+                teamId = DBHelper.CreateNewTeam(player1_Id, player2_Id);
+            }
+            else {
+                teamId = DBHelper.CreateNewTeam(player1_Id);
+            }
+            return Ok(teamId);
+        }
+        #endregion
 
+        #region CREATE
         //required, one of: FirstName, LastName, ScreenName, BDLoginName, Email
+        [Route("api/GetPlayerInfo")]
         public IHttpActionResult GetPlayerInfo(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID)
         {
             if (!ModelState.IsValid) { return BadRequest(); }
@@ -58,5 +78,6 @@ namespace BDPPMaster.Controllers
             var player = DBHelper.GetPlayerInfo(FirstName, LastName, ScreenName, BDLoginName, Email, RFID);
             return Ok(player);
         }
+        #endregion
     }
 }

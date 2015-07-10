@@ -15,6 +15,20 @@ namespace BDPPMaster.Helpers
 
         #region GET
         //required, one of: FirstName, LastName, ScreenName, BDLoginName, Email
+        public static int GetPlayerIdByScreenLoginNames(string ScreenName, string BDLoginName) {
+            var query = "SELECT PlayerId FROM [Players] WHERE ScreenName = @ScreenName OR BDLoginName = @BDLoginName";
+            using (var connection = new SqlConnection(_bdppmasterdb))
+            {
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ScreenName", ScreenName);
+                    command.Parameters.AddWithValue("@BDLoginName", BDLoginName);
+                    connection.Open();
+                    var playerId = Convert.ToInt32(command.ExecuteScalar());
+                    return playerId;
+                }
+            }
+        }
         public static Player GetPlayerInfo(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID) {
             var queryParams = new StringBuilder();
             #region Append Conditions
@@ -60,7 +74,6 @@ namespace BDPPMaster.Helpers
             #endregion
 
             var query = String.Format("SELECT * FROM [Players] WHERE {0};", queryParams.ToString());
-
             using (var connection = new SqlConnection(_bdppmasterdb))
             {
                 using (var command = new SqlCommand(query.ToString(), connection))
@@ -90,18 +103,56 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
-        //public static Player GetTeam
+        public static Team GetTeamPlayersInfo(int TeamId)
+        {
+            var team = new Team();
+            var query = @"SELECT t.TeamId, p.* 
+                          FROM [Teams] t
+                          INNER JOIN [Players] p
+                          ON p.PlayerId IN (t.Player1_Id, t.Player2_Id)
+                          WHERE t.TeamId = @TeamId;";
+            using (var connection = new SqlConnection(_bdppmasterdb))
+            {
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@TeamId", TeamId);
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (!reader.HasRows) { return null; }
+                        while (reader.Read()) {
+                            team.TeamId = reader.GetInt32(reader.GetOrdinal("TeamId")); //TeamId is constant, overwrite is not a concern
+                            var player = new Player()
+                            {
+                                PlayerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
+                                FirstName = reader["FirstName"].ToString(),
+                                LastName = reader["LastName"].ToString(),
+                                ScreenName = reader["screenName"].ToString(),
+                                BDLoginName = reader["BDLoginName"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                RFID = reader["RFID"].ToString()
+                            };
+
+                            //if (!reader["ProfileImage"].Equals(DBNull.Value)) { 
+                            //    //process image here
+                            //}
+
+                            team.Players.Add(player);
+                        }
+                        return team;
+                    }
+                }
+            }
+        }
         #endregion
 
         #region CREATE
         //required, all of: FirstName, LastName, ScreenName, BDLoginName, Email
         public static Player CreateNewPlayer(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID)
         {
-
             var query = @"INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email, RFID)
                           OUTPUT Inserted.PlayerId
                           VALUES (@FirstName, @LastName, @ScreenName, @BDLoginName, @Email, @RFID);";
-
             using (var connection = new SqlConnection(_bdppmasterdb)) {
                 using (var command = new SqlCommand(query, connection)) {
                     command.Parameters.AddWithValue("@FirstName", FirstName);
@@ -134,7 +185,23 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
-
+        public static int CreateNewTeam(int Player1_Id, int Player2_Id = 0) //returns int TeamId
+        {
+            var query = @"INSERT INTO [Teams] (Player1_Id, Player2_Id) 
+                          OUTPUT Inserted.TeamId
+                          VALUES (@Player1_Id, @Player2_Id);";
+            using (var connection = new SqlConnection(_bdppmasterdb))
+            {
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Player1_Id", Player1_Id);
+                    command.Parameters.AddWithValue("@Player2_Id", Player2_Id);
+                    connection.Open();
+                    var teamId = Convert.ToInt32(command.ExecuteScalar());
+                    return teamId;
+                }
+            }
+        }
         #endregion
 
    //     // Set the connection, command, and then execute the command with non query.

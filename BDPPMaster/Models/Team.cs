@@ -8,7 +8,6 @@ namespace BDPPMaster.Models
     public class Team
     {
         public int TeamId { get; set; }
-        public int Player1_id { get; set; }
-        public int Player2_id { get; set; }
+        public List<Player> Players { get; set; }
     }
 }
