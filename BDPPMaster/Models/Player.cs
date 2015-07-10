@@ -14,6 +14,7 @@ namespace BDPPMaster.Models
         public string BDLoginName { get; set; }
         public string Email { get; set; }
         public string RFID { get; set; }
+        public string ImageNameWithExt { get; set; }
 
         public int PlayerId { get; set; }
         public int GamesWon { get; set; }
