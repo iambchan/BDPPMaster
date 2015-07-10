@@ -1,4 +1,5 @@
 ﻿using BDPPMaster.Helpers;
+using BDPPMaster.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace BDPPMaster.Controllers
 {
     public class WebApiController : ApiController
     {
-        #region GET
+        #region CREATE
         //required, all of: FirstName, LastName, ScreenName, BDLoginName, Email
-        [Route("api/CreateNewPlayer")]
+        [Route("api/Create/Player")]
         public IHttpActionResult CreateNewPlayer(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID)
         {
             if (!ModelState.IsValid) { return BadRequest(); }
@@ -50,12 +51,13 @@ namespace BDPPMaster.Controllers
             return Ok(newPlayer);
         }
         //ScreenLoginName is ScreenName or BDLoginName
-        [Route("api/CreateNewTeam")]
+        [Route("api/Create/Team")]
         public IHttpActionResult CreateNewTeam(string ScreenLoginName1, string ScreenLoginName2)
         {
             if (!ModelState.IsValid) { return BadRequest(); }
             var player1_Id = DBHelper.GetPlayerIdByScreenLoginNames(ScreenLoginName1, ScreenLoginName1);
             var teamId = 0;
+
             if (ScreenLoginName2 != null)
             {
                 var player2_Id = DBHelper.GetPlayerIdByScreenLoginNames(ScreenLoginName2, ScreenLoginName2);
@@ -66,11 +68,18 @@ namespace BDPPMaster.Controllers
             }
             return Ok(teamId);
         }
+        [Route("api/Create/Game/{TeamId1:int}/{TeamId2:int}")]
+        public IHttpActionResult CreateNewGame(int TeamId1, int TeamId2)
+        {
+            if (!ModelState.IsValid) { return BadRequest(); }
+            var gameId = DBHelper.CreateNewGame(TeamId1, TeamId2);
+            return Ok(gameId);
+        }
         #endregion
 
-        #region CREATE
+        #region GET
         //required, one of: FirstName, LastName, ScreenName, BDLoginName, Email
-        [Route("api/GetPlayerInfo")]
+        [Route("api/Get/Player")]
         public IHttpActionResult GetPlayerInfo(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID)
         {
             if (!ModelState.IsValid) { return BadRequest(); }
@@ -78,12 +87,22 @@ namespace BDPPMaster.Controllers
             var player = DBHelper.GetPlayerInfo(FirstName, LastName, ScreenName, BDLoginName, Email, RFID);
             return Ok(player);
         }
-        [Route("api/GetTeamInfo/{TeamId:int}")]
-        public IHttpActionResult GetTeamInfo(int TeamId) {
+        [Route("api/Get/Team/{TeamId:int}")]
+        public IHttpActionResult GetTeamInfo(int TeamId)
+        {
             if (!ModelState.IsValid) { return BadRequest(); }
             var team = DBHelper.GetTeamPlayersInfo(TeamId);
             return Ok(team);
         }
+        [Route("api/Get/Game/{GameId:int}")]
+        public IHttpActionResult GetGameInfo(int GameId)
+        {
+            if (!ModelState.IsValid) { return BadRequest(); }
+            var team = DBHelper.GetTeamPlayersInfo(GameId);
+            return Ok(team);
+        }
+
+
         #endregion
     }
 }

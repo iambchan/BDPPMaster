@@ -10,8 +10,7 @@ namespace BDPPMaster.Models
         public int GameId { get; set; }
         public int Team1_Score { get; set; }
         public int Team2_Score { get; set; }
-        public Team Team1 { get; set; }
-        public Team Team2 { get; set; }
+        public List<Team> Teams { get; set; }
 
         DateTime Start { get; set; }
         DateTime End { get; set; }
