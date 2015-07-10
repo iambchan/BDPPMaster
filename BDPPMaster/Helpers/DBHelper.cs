@@ -29,6 +29,36 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
+        public static List<Player> GetAllPlayers() {
+            var players = new List<Player>();
+            var query = String.Format("SELECT * FROM [Players] ORDER BY PlayerId;");
+            using (var connection = new SqlConnection(_bdppmasterdb))
+            {
+                using (var command = new SqlCommand(query.ToString(), connection))
+                {
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (!reader.HasRows) { return null; }
+                        while (reader.Read())
+                        {
+                            players.Add(new Player()
+                            {
+                                PlayerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
+                                FirstName = reader["FirstName"].ToString(),
+                                LastName = reader["LastName"].ToString(),
+                                ScreenName = reader["screenName"].ToString(),
+                                BDLoginName = reader["BDLoginName"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                RFID = reader["RFID"].ToString(),
+                                ImageNameWithExt = reader["ImageNameWithExt"].ToString()
+                            });
+                        }
+                        return players;
+                    }
+                }
+            }
+        }
         public static Player GetPlayerInfo(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID) {
             var queryParams = new StringBuilder();
             #region Append Conditions
@@ -91,13 +121,9 @@ namespace BDPPMaster.Helpers
                             ScreenName = reader["screenName"].ToString(),
                             BDLoginName = reader["BDLoginName"].ToString(),
                             Email = reader["Email"].ToString(),
-                            RFID = reader["RFID"].ToString()
+                            RFID = reader["RFID"].ToString(),
+                            ImageNameWithExt = reader["ImageNameWithExt"].ToString()
                         };
-
-                        //if (!reader["ProfileImage"].Equals(DBNull.Value)) { 
-                        //    //process image here
-                        //}
-
                         return player;
                     }
                 }
@@ -130,13 +156,9 @@ namespace BDPPMaster.Helpers
                                 ScreenName = reader["screenName"].ToString(),
                                 BDLoginName = reader["BDLoginName"].ToString(),
                                 Email = reader["Email"].ToString(),
-                                RFID = reader["RFID"].ToString()
+                                RFID = reader["RFID"].ToString(),
+                                ImageNameWithExt = reader["ImageNameWithExt"].ToString()
                             };
-
-                            //if (!reader["ProfileImage"].Equals(DBNull.Value)) { 
-                            //    //process image here
-                            //}
-
                             team.Players.Add(player);
                         }
                         return team;
@@ -144,48 +166,60 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
-//        public static Game GetGameInfo(int GameId) 
-//        {
-//            var team = new Team();
-//            var query = @"SELECT t.TeamId, p.* 
-//                          FROM [Teams] t
-//                          INNER JOIN [Players] p
-//                          ON p.PlayerId IN (t.Player1_Id, t.Player2_Id)
-//                          WHERE t.TeamId = @TeamId;";
-//            using (var connection = new SqlConnection(_bdppmasterdb))
-//            {
-//                using (var command = new SqlCommand(query, connection))
-//                {
-//                    command.Parameters.AddWithValue("@TeamId", TeamId);
-//                    connection.Open();
-//                    using (var reader = command.ExecuteReader())
-//                    {
-//                        if (!reader.HasRows) { return null; }
-//                        while (reader.Read())
-//                        {
-//                            team.TeamId = reader.GetInt32(reader.GetOrdinal("TeamId")); //TeamId is constant, overwrite is not a concern
-//                            var player = new Player()
-//                            {
-//                                PlayerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
-//                                FirstName = reader["FirstName"].ToString(),
-//                                LastName = reader["LastName"].ToString(),
-//                                ScreenName = reader["screenName"].ToString(),
-//                                BDLoginName = reader["BDLoginName"].ToString(),
-//                                Email = reader["Email"].ToString(),
-//                                RFID = reader["RFID"].ToString()
-//                            };
+        public static Game GetGameInfo(int GameId)
+        {
+            var game = new Game() { 
+                Teams = new List<Team>()
+            };
+            var team = new Team();
+            var currentTeamId = 0;
+            var nextTeamId = 0;
+            var query = @"SELECT * FROM [Games] G
+                          INNER JOIN [Teams] t ON t.TeamId IN (g.Team1_id, g.Team2_id)
+                          INNER JOIN [Players] P ON p.PlayerId IN (t.Player1_id, t.Player2_id)
+                          WHERE g.GameId = @GameId;";
+            using (var connection = new SqlConnection(_bdppmasterdb))
+            {
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@GameId", GameId);
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (!reader.HasRows) { return null; }
+                        while (reader.Read())
+                        {
+                            //Constants, overwrite is not a concern:
+                            game.GameId = reader.GetInt32(reader.GetOrdinal("GameId"));
+                            game.Team1_Score = reader.GetInt32(reader.GetOrdinal("Team1_Score"));
+                            game.Team2_Score = reader.GetInt32(reader.GetOrdinal("Team2_Score"));
+                            nextTeamId = reader.GetInt32(reader.GetOrdinal("TeamId"));
 
-//                            //if (!reader["ProfileImage"].Equals(DBNull.Value)) { 
-//                            //    //process image here
-//                            //}
-
-//                            team.Players.Add(player);
-//                        }
-//                        return team;
-//                    }
-//                }
-//            }
-//        }
+                            if (currentTeamId != nextTeamId) {
+                                if(currentTeamId > 0){ game.Teams.Add(team); }
+                                currentTeamId = nextTeamId;
+                                team = new Team() {
+                                    TeamId = currentTeamId,
+                                    Players = new List<Player>()
+                                };
+                            }
+                            team.Players.Add(new Player()
+                            {
+                                PlayerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
+                                FirstName = reader["FirstName"].ToString(),
+                                LastName = reader["LastName"].ToString(),
+                                ScreenName = reader["screenName"].ToString(),
+                                BDLoginName = reader["BDLoginName"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                RFID = reader["RFID"].ToString(),
+                                ImageNameWithExt = reader["ImageNameWithExt"].ToString()
+                            });
+                        }
+                        return game;
+                    }
+                }
+            }
+        }
         #endregion
 
         #region CREATE
@@ -264,7 +298,7 @@ namespace BDPPMaster.Helpers
         }
         #endregion
 
-   //     // Set the connection, command, and then execute the command with non query.
+        //     // Set the connection, command, and then execute the command with non query.
    //   public static Int32 ExecuteNonQuery(String connectionString, String commandText,
    //       CommandType commandType, params SqlParameter[] parameters) {
    //      using (SqlConnection conn = new SqlConnection(connectionString)) {
