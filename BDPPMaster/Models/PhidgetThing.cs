@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Ajax.Utilities;
 using Phidgets;
 using Phidgets.Events;
 
@@ -7,7 +8,7 @@ namespace BDPPMaster.Models
     public static class PhidgetThing
     {
 
-        private static String thisInt;
+        private static String thisInt = "";
         public static String doPhidgetThings()
         {
             try
@@ -30,6 +31,10 @@ namespace BDPPMaster.Models
                 rfid.Antenna = true;
                 rfid.LED = true;
 
+                while(thisInt == "")
+                {
+                    
+                }
                 //turn off the led
                 rfid.LED = false;
 
