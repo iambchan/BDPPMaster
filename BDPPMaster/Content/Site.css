@@ -23,6 +23,11 @@ textarea {
     max-width: 280px;
 }
 
+h2{
+    text-align: center;
+    color: coral;
+}
+
 
 /* ScoreBoard page */
 .score{
@@ -32,4 +37,22 @@ textarea {
 
 .profileImage{
     height: 100px;
+}
+
+.center{
+    text-align: center;
+}
+
+.score input{
+    border-style: none;
+}
+
+.timer{
+    font-size: 45px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+button{
+
 }

@@ -29,40 +29,40 @@ GO
 CREATE TABLE [Players]
 (
 	PlayerId		int IDENTITY(1,1) PRIMARY KEY,
-	FirstName		NVARCHAR(50),
-	LastName		NVARCHAR(50),
-	ScreenName		NVARCHAR(50),
+	FirstName		NVARCHAR(50) NOT NULL,
+	LastName		NVARCHAR(50) NOT NULL,
+	ScreenName		NVARCHAR(50) NOT NULL,
 	BDLoginName		NVARCHAR(50) NOT NULL,
-	Email			NVARCHAR(255),
-	ProfileImage	IMAGE,
-	RFID			NVARCHAR(255)
+	Email			NVARCHAR(255) NOT NULL,
+	ProfileImage	IMAGE DEFAULT NULL,
+	RFID			NVARCHAR(255) DEFAULT NULL
 );
 
 CREATE TABLE [Teams]
 (
 	TeamId		int IDENTITY(1,1) PRIMARY KEY,
-	Player1_Id	int CONSTRAINT FK_Teams_Players_P1 FOREIGN KEY (Player1_Id) REFERENCES [Players](PlayerId),
-	Player2_Id	int DEFAULT NULL CONSTRAINT FK_Teams_Players_P2 FOREIGN KEY (Player2_Id) REFERENCES [Players](PlayerId)
+	Player1_Id	int NOT NULL CONSTRAINT FK_Teams_Players_P1 FOREIGN KEY (Player1_Id) REFERENCES [Players](PlayerId),
+	Player2_Id	int DEFAULT 0 CONSTRAINT FK_Teams_Players_P2 FOREIGN KEY (Player2_Id) REFERENCES [Players](PlayerId)
 );
 
 CREATE TABLE [Games]
 (
 	GameId			int IDENTITY(1,1) PRIMARY KEY,
-	Team1_Id		int CONSTRAINT FK_Games_Teams_T1 FOREIGN KEY (Team1_Id) REFERENCES [Teams] (TeamId),
-	Team2_Id		int CONSTRAINT FK_Games_Teams_T2 FOREIGN KEY (Team2_Id) REFERENCES [Teams] (TeamId),
-	Team1_score		int NOT NULL DEFAULT 0,
-	Team2_score		int NOT NULL DEFAULT 0,
-	StartDateTime	DateTime,
-	EndDateTime		DateTime
+	Team1_Id		int NOT NULL CONSTRAINT FK_Games_Teams_T1 FOREIGN KEY (Team1_Id) REFERENCES [Teams] (TeamId),
+	Team2_Id		int NOT NULL CONSTRAINT FK_Games_Teams_T2 FOREIGN KEY (Team2_Id) REFERENCES [Teams] (TeamId),
+	Team1_Score		int NOT NULL DEFAULT 0,
+	Team2_Score		int NOT NULL DEFAULT 0,
+	StartDateTime	DateTime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	EndDateTime		DateTime DEFAULT NULL
 );
 GO
 
-INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName)
+INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email)
 VALUES
-('One', 'Guest', 'Guest1', 'bdppGuest1'),
-('Two', 'Guest', 'Guest2', 'bdppGuest2'),
-('Three', 'Guest', 'Guest3', 'bdppGuest3'),
-('Four', 'Guest', 'Guest4', 'bdppGuest4');
+('One', 'Guest', 'Guest1', 'bdppGuest1', 'bdppGuest1@bd.com'),
+('Two', 'Guest', 'Guest2', 'bdppGuest2', 'bdppGuest2@bd.com'),
+('Three', 'Guest', 'Guest3', 'bdppGuest3', 'bdppGuest3@bd.com'),
+('Four', 'Guest', 'Guest4', 'bdppGuest4', 'bdppGuest4@bd.com');
 
 INSERT INTO [Teams] (Player1_Id, Player2_Id)
 VALUES

@@ -181,6 +181,7 @@ namespace BDPPMaster.Controllers
             return View();
         }
 
+        // Todo pass in team ids 
         public ActionResult ScoreBoard()
         {
             ViewBag.Message = "ScoreBoard";
@@ -188,6 +189,13 @@ namespace BDPPMaster.Controllers
             return View();
         }
 
+        public ActionResult GameOptions()
+        {
+            ViewBag.Message = "fbghfhytyh";
+            PhidgetThing.doPhidgetThings();
+
+            return View();
+        }
 
     }
 }
