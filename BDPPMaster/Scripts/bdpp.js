@@ -3,8 +3,6 @@ var team1_Id = 1;
 var team2_Id = 2;
 
 
-);
-
 function helloClicked() {
 
     $.ajax({
@@ -12,12 +10,13 @@ function helloClicked() {
         dataType: 'html',
         type: 'get',
         success: function (data, textStatus, jQxhr) {
-           
+
         },
         error: function (jqXhr, textStatus, errorThrown) {
-           
+
         }
-    });
+    })
+};
 
 $(document).ready(function () {
     bindButtons();
@@ -104,4 +103,36 @@ function finishGame() {
     //console.log(finishGameData);
     // Post request to add game to database
 
+}
+
+function beginGame() {
+    var jsonPlayers;
+
+
+    $.ajax({
+        url: "/api/Get/Player/All",
+        dataType: 'json',
+        type: 'get',
+        contentType: 'application/json',
+        success: function (data, textStatus, jQxhr) {
+            jsonPlayers = data;
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            alert("error");
+        }
+    });
+
+    $.ajax({
+        url: requestUrl,
+        dataType: 'html',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify(requestModel),
+        success: function (data, textStatus, jQxhr) {
+            toastr["success"]("Successfully changed.", featureKey);
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            toastr["error"]("Feature Toggle was not changed.", featureKey);
+        }
+    });
 }
