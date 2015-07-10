@@ -108,12 +108,12 @@ function checkIfTwoPlayersSelected() {
     if (visiblePlayers.length === 2) {
         var player1 = $(visiblePlayers[0]);
         var player2 = $(visiblePlayers[1]);
-        $('[name=idp1').val(player1.attr('data-player-id'));
-        $('[name=idp2').val(player2.attr('data-player-id'));
-        $('[name=imagep1').val(player1.attr('data-player-image'));
-        $('[name=imagep2').val(player2.attr('data-player-image'));
-        $('[name=namep1').val(player1.attr('data-player-screenName'));
-        $('[name=namep2').val(player2.attr('data-player-screenName'));
+        $('[name=idp1]').val(player1.attr('data-player-id'));
+        $('[name=idp2]').val(player2.attr('data-player-id'));
+        $('[name=imagep1]').val(player1.attr('data-player-image'));
+        $('[name=imagep2]').val(player2.attr('data-player-image'));
+        $('[name=namep1]').val(player1.attr('data-player-screenName'));
+        $('[name=namep2]').val(player2.attr('data-player-screenName'));
 
         $('#playerForm').submit();
     }
