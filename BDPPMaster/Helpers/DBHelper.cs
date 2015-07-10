@@ -72,13 +72,13 @@ namespace BDPPMaster.Helpers
                         reader.Read(); //only need the first item
                         var player = new Player()
                         {
-                            playerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
-                            firstName = reader["FirstName"].ToString(),
-                            lastName = reader["LastName"].ToString(),
-                            screenName = reader["screenName"].ToString(),
-                            bdLoginName = reader["BDLoginName"].ToString(),
-                            email = reader["Email"].ToString(),
-                            rfid = reader["RFID"].ToString()
+                            PlayerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
+                            FirstName = reader["FirstName"].ToString(),
+                            LastName = reader["LastName"].ToString(),
+                            ScreenName = reader["screenName"].ToString(),
+                            BDLoginName = reader["BDLoginName"].ToString(),
+                            Email = reader["Email"].ToString(),
+                            RFID = reader["RFID"].ToString()
                         };
 
                         //if (!reader["ProfileImage"].Equals(DBNull.Value)) { 
@@ -90,6 +90,7 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
+        //public static Player GetTeam
         #endregion
 
         #region CREATE
@@ -115,13 +116,13 @@ namespace BDPPMaster.Helpers
                         reader.Read(); //only need the first item
                         var player = new Player()
                         {
-                            playerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
-                            firstName = reader["FirstName"].ToString(),
-                            lastName = reader["LastName"].ToString(),
-                            screenName = reader["screenName"].ToString(),
-                            bdLoginName = reader["BDLoginName"].ToString(),
-                            email = reader["Email"].ToString(),
-                            rfid = reader["RFID"].ToString()
+                            PlayerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
+                            FirstName = reader["FirstName"].ToString(),
+                            LastName = reader["LastName"].ToString(),
+                            ScreenName = reader["screenName"].ToString(),
+                            BDLoginName = reader["BDLoginName"].ToString(),
+                            Email = reader["Email"].ToString(),
+                            RFID = reader["RFID"].ToString()
                         };
 
                         //if (!reader["ProfileImage"].Equals(DBNull.Value)) { 
