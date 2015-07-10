@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BDPPMaster.Models;
 
 namespace BDPPMaster.Controllers
 {
@@ -49,6 +50,13 @@ namespace BDPPMaster.Controllers
             return View();
         }
 
+        public ActionResult GameOptions()
+        {
+            ViewBag.Message = "fbghfhytyh";
+            PhidgetThing.doPhidgetThings();
+
+            return View();
+        }
 
     }
 }
