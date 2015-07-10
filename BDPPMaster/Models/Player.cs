@@ -7,7 +7,19 @@ namespace BDPPMaster.Models
 {
     public class Player
     {
-        public int firstName { get; set; }
-        public int lastName { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string screenName { get; set; }
+        public int gamesWon { get; set; }
+        public int gamesPlayed { get; set; }
+        public TimeSpan timePlayed { get; set; }
+
+
+        public double percentWon(){
+            return ((double) gamesWon / gamesPlayed);
     }
+
+    }
+
+
 }
