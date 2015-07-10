@@ -35,7 +35,7 @@ CREATE TABLE [Players]
 	BDLoginName		NVARCHAR(50) NOT NULL,
 	Email			NVARCHAR(255),
 	ProfileImage	IMAGE,
-	RFID			VARCHAR(255)
+	RFID			NVARCHAR(255)
 );
 
 CREATE TABLE [Teams]
