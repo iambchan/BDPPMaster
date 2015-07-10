@@ -39,12 +39,20 @@ h2{
     height: 100px;
 }
 
+.playerContainer{
+    background-color: coral;
+    padding: 10px;
+    margin: 0;
+}
+
 .center{
     text-align: center;
 }
 
 .score input{
     border-style: none;
+    width: 150px;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .timer{
@@ -53,6 +61,23 @@ h2{
     margin-bottom: 25px;
 }
 
-button{
+.panel{
+    border: solid;
+    border-width: thin;
+    border-color: coral;
+    padding: 15px;
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
 
+body{
+    background-image: url("/Content/images/table-tennis-background-copy.jpg");
+    background-size: cover;
+}
+
+.scoreboard__button{
+  padding: 20px;
+  background-color: white;
+  border: solid;
+  border-color: coral;
 }
