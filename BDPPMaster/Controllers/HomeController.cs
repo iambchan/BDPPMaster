@@ -45,22 +45,22 @@ namespace BDPPMaster.Controllers
             List<Player> players = new List<Player>();
 
             Player p1 = new Player();
-            p1.ScreenName = "p1";
+            p1.ScreenName = "JeffB";
             p1.GamesPlayed = 10;
-            p1.GamesWon = 7;
+            p1.GamesWon = 4;
 
             Player p2 = new Player();
-            p2.ScreenName = "p2";
+            p2.ScreenName = "DanB";
             p2.GamesPlayed = 12;
-            p2.GamesWon = 7;
+            p2.GamesWon = 2;
 
             Player p3 = new Player();
-            p3.ScreenName = "p3";
-            p3.GamesPlayed = 0;
-            p3.GamesWon = 7;
+            p3.ScreenName = "TalB";
+            p3.GamesPlayed = 50;
+            p3.GamesWon = 45;
 
             Player p4 = new Player();
-            p4.ScreenName = "p4";
+            p4.ScreenName = "DalipJ";
             p4.GamesPlayed = 13;
             p4.GamesWon = 7;
 
@@ -80,22 +80,22 @@ namespace BDPPMaster.Controllers
             List<Player> players = new List<Player>();
 
             Player p1 = new Player();
-            p1.ScreenName = "p1";
+            p1.ScreenName = "JeffB";
             p1.GamesPlayed = 10;
-            p1.GamesWon = 7;
+            p1.GamesWon = 4;
 
             Player p2 = new Player();
-            p2.ScreenName = "p2";
+            p2.ScreenName = "DanB";
             p2.GamesPlayed = 12;
-            p2.GamesWon = 7;
+            p2.GamesWon = 2;
 
             Player p3 = new Player();
-            p3.ScreenName = "p3";
-            p3.GamesPlayed = 0;
-            p3.GamesWon = 7;
+            p3.ScreenName = "TalB";
+            p3.GamesPlayed = 50;
+            p3.GamesWon = 45;
 
             Player p4 = new Player();
-            p4.ScreenName = "p4";
+            p4.ScreenName = "DalipJ";
             p4.GamesPlayed = 13;
             p4.GamesWon = 7;
 
@@ -115,22 +115,22 @@ namespace BDPPMaster.Controllers
             List<Player> players = new List<Player>();
 
             Player p1 = new Player();
-            p1.ScreenName = "p1";
+            p1.ScreenName = "JeffB";
             p1.GamesPlayed = 10;
-            p1.GamesWon = 7;
+            p1.GamesWon = 4;
 
             Player p2 = new Player();
-            p2.ScreenName = "p2";
+            p2.ScreenName = "DanB";
             p2.GamesPlayed = 12;
-            p2.GamesWon = 7;
+            p2.GamesWon = 2;
 
             Player p3 = new Player();
-            p3.ScreenName = "p3";
-            p3.GamesPlayed = 0;
-            p3.GamesWon = 7;
+            p3.ScreenName = "TalB";
+            p3.GamesPlayed = 50;
+            p3.GamesWon = 45;
 
             Player p4 = new Player();
-            p4.ScreenName = "p4";
+            p4.ScreenName = "DalipJ";
             p4.GamesPlayed = 13;
             p4.GamesWon = 7;
 
@@ -148,24 +148,29 @@ namespace BDPPMaster.Controllers
             // var partialViewModel = new PartialViewModel(model);
 
             List<Player> players = new List<Player>();
+
             Player p1 = new Player();
-            p1.ScreenName = "p1";
+            p1.ScreenName = "JeffB";
             p1.GamesPlayed = 10;
-            p1.GamesWon = 7;
+            p1.GamesWon = 4;
+            p1.TimePlayed = new TimeSpan(5, 4, 0);
 
             Player p2 = new Player();
-            p2.ScreenName = "p2";
+            p2.ScreenName = "DanB";
             p2.GamesPlayed = 12;
-            p2.GamesWon = 7;
+            p2.GamesWon = 2;
+            p2.TimePlayed = new TimeSpan(0, 3, 3);
+
             Player p3 = new Player();
-            p3.ScreenName = "p3";
-            p3.GamesPlayed = 0;
-            p3.GamesWon = 7;
+            p3.ScreenName = "TalB";
+            p3.GamesPlayed = 50;
+            p3.TimePlayed = new TimeSpan(34, 45, 0);
 
             Player p4 = new Player();
-            p4.ScreenName = "p4";
+            p4.ScreenName = "DalipJ";
             p4.GamesPlayed = 13;
             p4.GamesWon = 7;
+            p4.TimePlayed = new TimeSpan(4, 4, 1);
 
             players.Add(p1);
             players.Add(p2);

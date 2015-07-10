@@ -31,7 +31,7 @@ namespace BDPPMaster.Models
                 return 0;
             }
 
-            return ((double)GamesWon / GamesPlayed);
+            return Math.Round(((double)GamesWon / GamesPlayed) * 100);
         }
     }
 
