@@ -58,12 +58,12 @@ CREATE TABLE [Games]
 );
 GO
 
-INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email, RFID)
+INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email, ImageNameWithExt, RFID)
 VALUES
-('Jeff', 'Booth', 'JeffB', 'bdppGuest1', 'bdppGuest1@bd.com', '11005b4be0'),
-('Dan', 'Brodie', 'DanB', 'bdppGuest2', 'bdppGuest2@bd.com', '110033b82e'),
-('Tal', 'Ball', 'TalB', 'bdppGuest3', 'bdppGuest3@bd.com', '0107ee6e67'),
-('Dalip', 'Jawanda', 'DalipJ', 'bdppGuest4', 'bdppGuest4@bd.com', '0107ee6809');
+('Jeff', 'Booth', 'JeffB', 'bdppGuest1', 'bdppGuest1@bd.com', 'jeff.jpg', '11005b4be0'),
+('Dan', 'Brodie', 'DanB', 'bdppGuest2', 'bdppGuest2@bd.com', 'dan.jpg', '110033b82e'),
+('Tal', 'Ball', 'TalB', 'bdppGuest3', 'bdppGuest3@bd.com', 'tal.jpg', '0107ee6e67'),
+('Dalip', 'Jawanda', 'DalipJ', 'bdppGuest4', 'bdppGuest4@bd.com', 'dalip.jpg', '0107ee6809');
 
 INSERT INTO [Teams] (Player1_Id, Player2_Id)
 VALUES
@@ -74,18 +74,3 @@ INSERT INTO [Games] (Team1_Id, Team2_Id, Team1_score, Team2_score, StartDateTime
 VALUES
 (1, 2, 15, 14, CURRENT_TIMESTAMP, DATEADD(MINUTE, 10, CURRENT_TIMESTAMP));
 GO
-
-
-INSERT INTO [Teams] (Player1_Id, Player2_Id)
-VALUES (1, 3), (1, 4), (2, 3)
-
-select * from Teams;
-
-INSERT INTO [Games] (Team1_Id, Team2_Id, Team1_score, Team2_score, StartDateTime, EndDateTime)
-VALUES
-(1, 3, 16, 21, CURRENT_TIMESTAMP, DATEADD(MINUTE, 10, CURRENT_TIMESTAMP)),
-(1, 4, 20, 21, CURRENT_TIMESTAMP, DATEADD(MINUTE, 10, CURRENT_TIMESTAMP)),
-(2, 3, 9, 14, CURRENT_TIMESTAMP, DATEADD(MINUTE, 10, CURRENT_TIMESTAMP)),
-(1, 2, 15, 5, CURRENT_TIMESTAMP, DATEADD(MINUTE, 10, CURRENT_TIMESTAMP));
-
-Select * from Games;
