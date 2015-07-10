@@ -20,6 +20,7 @@ namespace BDPPMaster.Models
         public int GamesWon { get; set; }
         public int GamesPlayed { get; set; }
         public TimeSpan TimePlayed { get; set; }
+        public string Avatar { get; set; }
 
         //public Image profileImage { get; set; } //if images are stored as bytes in the database
 

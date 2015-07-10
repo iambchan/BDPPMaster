@@ -29,6 +29,14 @@ h3{
     color: coral;
 }
 
+/* Index */
+
+.beginButton{
+    font-size: 45px;
+}
+
+/* Index end */
+
 
 /* ScoreBoard page */
 .score{
@@ -104,4 +112,12 @@ tr{
 .table-title{
     font-weight: bold;
 }
+
+
+/* game Options section*/
+.screenName{
+    color: white;
+}
+
+/* game Options section end */
 
