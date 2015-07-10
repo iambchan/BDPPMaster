@@ -22,11 +22,16 @@ namespace BDPPMaster.Models
 
         //public Image profileImage { get; set; } //if images are stored as bytes in the database
 
-        public double PercentWon(){
-            return ((double) GamesWon / GamesPlayed);
+        public double PercentWon()
+        {
+            if (GamesWon == 0 || GamesPlayed == 0)
+            {
+                return 0;
+            }
+
+            return ((double)GamesWon / GamesPlayed);
+        }
     }
 
-    }
-     
 
 }

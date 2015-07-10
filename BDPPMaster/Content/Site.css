@@ -23,7 +23,8 @@ textarea {
     max-width: 280px;
 }
 
-h2{
+h2,
+h3{
     text-align: center;
     color: coral;
 }
@@ -80,4 +81,11 @@ body{
   background-color: white;
   border: solid;
   border-color: coral;
+}
+
+tr{
+    background-color: #FFC864;
+}
+.table-title{
+    font-weight: bold;
 }
