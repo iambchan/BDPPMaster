@@ -91,21 +91,45 @@ SELECT GameId, DATEDIFF(MINUTE, StartDateTime, EndDateTime)
 FROM [Games]
 WHERE GameId = 1;
 
---SELECT * FROM [Players] p
---INNER JOIN [Teams] t ON p.PlayerId = t.Player1_id
---OR p.PlayerId = t.Player2_id
---INNER JOIN [Games] g ON g.Team1_id = t.TeamId
---OR g.Team2_id = t.TeamId
+SELECT * FROM [Players] p
+INNER JOIN [Teams] t ON p.PlayerId = t.Player1_id
+OR p.PlayerId = t.Player2_id
+INNER JOIN [Games] g ON g.Team1_id = t.TeamId
+OR g.Team2_id = t.TeamId
+
+DECLARE @TeamsConsolidated TABLE
+(
+	TeamId int,
+	TeamScore int
+);
+INSERT INTO @TeamsConsolidated (TeamId, TeamScore)
+	Select g1.Team1_Id, g1.Team1_Score
+	FROM [Games] g1
+	UNION 
+	SELECT g2.Team2_Id, g2.Team2_Score
+	FROM [Games] g2
+SELECT * FROM @TeamsConsolidated
+ORDER BY TeamScore DESC;
 
 
---SELECT * FROM [Players] p
---INNER JOIN [Teams] t ON p.PlayerId = t.Player1_id
---OR p.PlayerId = t.Player2_id
---INNER JOIN [Games] g ON g.Team1_id = t.TeamId
---OR g.Team2_id = t.TeamId
---WHERE 
---(p.PlayerId = t.Player1_id
---AND g.Team1_score > g.Team2_score)
---OR 
---(p.PlayerId = t.Player2_id
---AND g.Team2_score > g.Team1_score)
+SELECT * FROM [Players] p
+INNER JOIN [Teams] t ON p.PlayerId IN (t.Player1_id, t.Player2_id)
+INNER JOIN [Games] g ON t.TeamId IN (g.Team1_id, g.Team2_id)
+WHERE 
+(g.Team1_score > g.Team2_score AND p.PlayerId = t.Player1_id)
+OR 
+(g.Team2_score > g.Team1_score AND p.PlayerId = t.Player2_id)
+
+
+
+SELECT * FROM [Teams];
+
+SELECT * FROM [Players] p
+INNER JOIN [Teams] t ON p.PlayerId IN (t.Player1_id, t.Player2_id)
+INNER JOIN [Games] g ON t.TeamId IN (g.Team1_id, g.Team2_id)
+WHERE 
+(p.PlayerId = t.Player1_id
+AND g.Team1_score > g.Team2_score)
+OR 
+(p.PlayerId = t.Player2_id
+AND g.Team2_score > g.Team1_score)

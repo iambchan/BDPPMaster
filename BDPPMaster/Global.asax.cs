@@ -14,13 +14,13 @@ namespace BDPPMaster
     {
         protected void Application_Start()
         {
+            //For Web API:
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            //For Web API:
-            GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
 }

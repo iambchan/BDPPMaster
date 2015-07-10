@@ -82,6 +82,19 @@ namespace BDPPMaster.Controllers
         //    var gameId = DBHelper.CreateNewGame(TeamId1, TeamId2);
         //    return Ok(gameId);
         //}
+        [Route("api/Create/Game/ByPlayerScreenLoginName")]
+        public IHttpActionResult CreateNewGameByPlayersScreenLoginName(string ScreenLoginName1, string ScreenLoginName2, int Team1_Score, int Team2_Score, DateTime StartDateTime, DateTime EndDateTime)
+        {
+            if (!ModelState.IsValid) { return BadRequest(); }
+            var player1_Id = DBHelper.GetPlayerIdByScreenLoginNames(ScreenLoginName1, ScreenLoginName1);
+            var player2_Id = DBHelper.GetPlayerIdByScreenLoginNames(ScreenLoginName2, ScreenLoginName2);
+
+            var team1_Id = DBHelper.CreateNewTeam(player1_Id);
+            var team2_Id = DBHelper.CreateNewTeam(player2_Id);
+
+            var game_Id = DBHelper.CreateNewGame(team1_Id, team2_Id, Team1_Score, Team2_Score, StartDateTime, EndDateTime);
+            return Ok(game_Id);
+        }
         #endregion
 
         #region GET
@@ -95,7 +108,14 @@ namespace BDPPMaster.Controllers
             if (player == null) { return NotFound(); }
             return Ok(player);
         }
-        [Route("api/Get/AllPlayers")]
+        [Route("api/Get/Player/Id")]
+        public IHttpActionResult GetPlayerIdByScreenLoginNames(string ScreenName, string BDLoginName)
+        {
+            if (!ModelState.IsValid) { return BadRequest(); }
+            var playerId = DBHelper.GetPlayerIdByScreenLoginNames(ScreenName, BDLoginName);
+            return Ok(playerId);
+        }
+        [Route("api/Get/Player/All")]
         public IHttpActionResult GetAllPlayers()
         {
             if (!ModelState.IsValid) { return BadRequest(); }
