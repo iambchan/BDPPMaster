@@ -190,7 +190,15 @@ namespace BDPPMaster.Controllers
 
             return View();
         }
+[HttpGet]
+        public ActionResult Hello()
+        {
+            ViewBag.Message = "fbghfhytyh";
+            String id = PhidgetThing.doPhidgetThings();
 
+            return View("GameOptions");
+        }
+        
         public ActionResult GameOptions()
         {
 
@@ -222,7 +230,7 @@ namespace BDPPMaster.Controllers
             players.Add(p3);
             players.Add(p4);
             ViewBag.Message = "fbghfhytyh";
-            //PhidgetThing.doPhidgetThings();
+
 
             return View(players);
         }

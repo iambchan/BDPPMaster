@@ -2,6 +2,23 @@
 var team1_Id = 1;
 var team2_Id = 2;
 
+
+);
+
+function helloClicked() {
+
+    $.ajax({
+        url: '/Home/Hello',
+        dataType: 'html',
+        type: 'get',
+        success: function (data, textStatus, jQxhr) {
+           
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+           
+        }
+    });
+
 $(document).ready(function () {
     bindButtons();
     incrementTime();
@@ -86,4 +103,5 @@ function finishGame() {
 
     //console.log(finishGameData);
     // Post request to add game to database
+
 }
