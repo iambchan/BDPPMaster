@@ -44,7 +44,11 @@ h3{
     text-align: center;
 }
 
-.profileImage{
+.loginPlayer .profileImage{
+    height: 350px;
+}
+
+#FinishGameForm .profileImage{
     height: 100px;
 }
 
@@ -52,6 +56,10 @@ h3{
     background-color: coral;
     padding: 10px;
     margin: 0;
+}
+
+.screenName{
+    font-size: 35px;
 }
 
 .center{
