@@ -131,6 +131,14 @@ namespace BDPPMaster.Controllers
             if (players == null) { return NotFound(); }
             return Ok(players);
         }
+        [Route("api/Get/Player/MostGames")]
+        public IHttpActionResult GetPlayersMostGames()
+        {
+            if (!ModelState.IsValid) { return BadRequest(); }
+            var playerIds = DBHelper.GetPlayersMostGames();
+            if (playerIds == null) { return NotFound(); }
+            return Ok(playerIds);
+        }
         [Route("api/Get/Team/{TeamId:int}")]
         public IHttpActionResult GetTeamInfo(int TeamId)
         {
