@@ -49,6 +49,7 @@ namespace BDPPMaster.Controllers
             var newPlayer = DBHelper.CreateNewPlayer(FirstName, LastName, ScreenName, BDLoginName, Email, RFID);
             return Ok(newPlayer);
         }
+        //ScreenLoginName is ScreenName or BDLoginName
         [Route("api/CreateNewTeam")]
         public IHttpActionResult CreateNewTeam(string ScreenLoginName1, string ScreenLoginName2)
         {
@@ -74,9 +75,14 @@ namespace BDPPMaster.Controllers
         {
             if (!ModelState.IsValid) { return BadRequest(); }
             if (FirstName == null && LastName == null && ScreenName == null && BDLoginName == null && Email == null && RFID == null) { return BadRequest("Please fill in at least one field"); }
-
             var player = DBHelper.GetPlayerInfo(FirstName, LastName, ScreenName, BDLoginName, Email, RFID);
             return Ok(player);
+        }
+        [Route("api/GetTeamInfo/{TeamId:int}")]
+        public IHttpActionResult GetTeamInfo(int TeamId) {
+            if (!ModelState.IsValid) { return BadRequest(); }
+            var team = DBHelper.GetTeamPlayersInfo(TeamId);
+            return Ok(team);
         }
         #endregion
     }
