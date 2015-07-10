@@ -29,6 +29,14 @@ h3{
     color: coral;
 }
 
+/* Index */
+
+.beginButton{
+    font-size: 45px;
+}
+
+/* Index end */
+
 
 /* ScoreBoard page */
 .score{
@@ -83,6 +91,21 @@ body{
   border-color: coral;
 }
 
+
+.scoreboard__button:hover{
+    background-color: coral;
+    color: white;
+}
+
+.score_incdec{
+    width: 40px;
+}
+
+.incdec_container{
+    margin-top: 20px;
+    font-size: 25px;
+}
+
 tr{
     background-color: #FFC864;
 }
@@ -97,3 +120,4 @@ tr{
 }
 
 /* game Options section end */
+

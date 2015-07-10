@@ -85,21 +85,33 @@ namespace BDPPMaster.Controllers
             if (!ModelState.IsValid) { return BadRequest(); }
             if (FirstName == null && LastName == null && ScreenName == null && BDLoginName == null && Email == null && RFID == null) { return BadRequest("Please fill in at least one field"); }
             var player = DBHelper.GetPlayerInfo(FirstName, LastName, ScreenName, BDLoginName, Email, RFID);
+            if (player == null) { return NotFound(); }
             return Ok(player);
         }
+        [Route("api/Get/AllPlayers")]
+        public IHttpActionResult GetAllPlayers()
+        {
+            if (!ModelState.IsValid) { return BadRequest(); }
+            var players = DBHelper.GetAllPlayers();
+            if (players == null) { return NotFound(); }
+            return Ok(players);
+        }
+
         [Route("api/Get/Team/{TeamId:int}")]
         public IHttpActionResult GetTeamInfo(int TeamId)
         {
             if (!ModelState.IsValid) { return BadRequest(); }
             var team = DBHelper.GetTeamPlayersInfo(TeamId);
+            if (team == null) { return NotFound(); }
             return Ok(team);
         }
         [Route("api/Get/Game/{GameId:int}")]
         public IHttpActionResult GetGameInfo(int GameId)
         {
             if (!ModelState.IsValid) { return BadRequest(); }
-            var team = DBHelper.GetTeamPlayersInfo(GameId);
-            return Ok(team);
+            var game = DBHelper.GetGameInfo(GameId);
+            if (game == null) { return NotFound(); }
+            return Ok(game);
         }
 
 
