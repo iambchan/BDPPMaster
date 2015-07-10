@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Http;
+using Phidgets;
 
 namespace BDPPMaster.Controllers
 {
@@ -108,6 +109,8 @@ namespace BDPPMaster.Controllers
             if (player == null) { return NotFound(); }
             return Ok(player);
         }
+
+
         [Route("api/Get/Player/Id")]
         public IHttpActionResult GetPlayerIdByScreenLoginNames(string ScreenName, string BDLoginName)
         {
@@ -155,8 +158,6 @@ namespace BDPPMaster.Controllers
             if (game == null) { return NotFound(); }
             return Ok(game);
         }
-
-
         #endregion
     }
 }
