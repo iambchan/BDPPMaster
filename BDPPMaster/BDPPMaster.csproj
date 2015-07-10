@@ -58,10 +58,6 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Phidget21.NET1.1, Version=2.1.8.0, Culture=neutral, PublicKeyToken=c2b1f2a3594bce52">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Program Files\Phidgets\Phidget21.NET1.1.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
@@ -96,7 +92,6 @@
     <Reference Include="Phidget21.NET, Version=2.1.8.208, Culture=neutral, PublicKeyToken=c2b1f2a3594bce52, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files\Phidgets\Phidget21.NET.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
