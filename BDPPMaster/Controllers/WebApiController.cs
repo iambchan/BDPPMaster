@@ -68,13 +68,20 @@ namespace BDPPMaster.Controllers
             }
             return Ok(teamId);
         }
-        [Route("api/Create/Game/{TeamId1:int}/{TeamId2:int}")]
-        public IHttpActionResult CreateNewGame(int TeamId1, int TeamId2)
+        [Route("api/Create/Game/")]
+        public IHttpActionResult CreateNewGame(int Team1_Id, int Team2_Id, int Team1_Score, int Team2_Score, DateTime StartDateTime, DateTime EndDateTime)
         {
             if (!ModelState.IsValid) { return BadRequest(); }
-            var gameId = DBHelper.CreateNewGame(TeamId1, TeamId2);
+            var gameId = DBHelper.CreateNewGame(Team1_Id, Team2_Id, Team1_Score, Team2_Score, StartDateTime, EndDateTime);
             return Ok(gameId);
         }
+        //[Route("api/Create/Game/{TeamId1:int}/{TeamId2:int}")]
+        //public IHttpActionResult CreateNewGame(int TeamId1, int TeamId2)
+        //{
+        //    if (!ModelState.IsValid) { return BadRequest(); }
+        //    var gameId = DBHelper.CreateNewGame(TeamId1, TeamId2);
+        //    return Ok(gameId);
+        //}
         #endregion
 
         #region GET
@@ -96,7 +103,6 @@ namespace BDPPMaster.Controllers
             if (players == null) { return NotFound(); }
             return Ok(players);
         }
-
         [Route("api/Get/Team/{TeamId:int}")]
         public IHttpActionResult GetTeamInfo(int TeamId)
         {

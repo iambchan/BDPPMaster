@@ -278,17 +278,21 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
-        public static int CreateNewGame(int Team1_id, int Team2_id) //returns int GameId
+        public static int CreateNewGame(int Team1_Id, int Team2_Id, int Team1_Score, int Team2_Score, DateTime StartDateTime, DateTime EndDateTime) //returns int GameId
         {
-            var query = @"INSERT INTO [Games] (Team1_id, Team2_id, StartDateTime) 
+            var query = @"INSERT INTO [Games] (Team1_id, Team2_id, Team1_Score, Team2_Score, StartDateTime, EndDateTime) 
                           OUTPUT Inserted.GameId
-                          VALUES (@Team1_id, @Team2_id, @StartDateTime);";
+                          VALUES (@Team1_Id, @Team2_Id, @Team1_Score, @Team2_Score, @StartDateTime, @EndDateTime);";
             using (var connection = new SqlConnection(_bdppmasterdb))
             {
                 using (var command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Team1_id", Team1_id);
-                    command.Parameters.AddWithValue("@Team2_id", Team2_id);
+                    command.Parameters.AddWithValue("@Team1_Id", Team1_Id);
+                    command.Parameters.AddWithValue("@Team2_Id", Team2_Id);
+                    command.Parameters.AddWithValue("@Team1_Id", Team1_Id);
+                    command.Parameters.AddWithValue("@Team2_Id", Team2_Id);
+                    command.Parameters.AddWithValue("@Team1_Id", Team1_Id);
+                    command.Parameters.AddWithValue("@Team2_Id", Team2_Id);
                     command.Parameters.AddWithValue("@StartDateTime", DateTime.Now);
                     connection.Open();
                     var gameId = Convert.ToInt32(command.ExecuteScalar());
@@ -296,9 +300,27 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
+//        public static int CreateNewGame(int Team1_id, int Team2_id) //returns int GameId
+//        {
+//            var query = @"INSERT INTO [Games] (Team1_id, Team2_id, StartDateTime) 
+//                          OUTPUT Inserted.GameId
+//                          VALUES (@Team1_id, @Team2_id, @StartDateTime);";
+//            using (var connection = new SqlConnection(_bdppmasterdb))
+//            {
+//                using (var command = new SqlCommand(query, connection))
+//                {
+//                    command.Parameters.AddWithValue("@Team1_id", Team1_id);
+//                    command.Parameters.AddWithValue("@Team2_id", Team2_id);
+//                    command.Parameters.AddWithValue("@StartDateTime", DateTime.Now);
+//                    connection.Open();
+//                    var gameId = Convert.ToInt32(command.ExecuteScalar());
+//                    return gameId;
+//                }
+//            }
+//        }
         #endregion
 
-        //     // Set the connection, command, and then execute the command with non query.
+   //     // Set the connection, command, and then execute the command with non query.
    //   public static Int32 ExecuteNonQuery(String connectionString, String commandText,
    //       CommandType commandType, params SqlParameter[] parameters) {
    //      using (SqlConnection conn = new SqlConnection(connectionString)) {
