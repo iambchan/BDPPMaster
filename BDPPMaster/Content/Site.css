@@ -81,3 +81,18 @@ body{
   border: solid;
   border-color: coral;
 }
+
+.scoreboard__button:hover{
+    background-color: coral;
+    color: white;
+}
+
+.score_incdec{
+    width: 40px;
+}
+
+.incdec_container{
+    margin-top: 20px;
+    font-size: 25px;
+}
+
