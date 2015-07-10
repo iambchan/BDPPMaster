@@ -38,6 +38,7 @@
                 var player = $('.loginPlayer[data-player-rfid="' + rfid + '"]');
                 if (player.length) {
                     player.show();
+                    checkIfTwoPlayersSelected();
                 }
             };
 
