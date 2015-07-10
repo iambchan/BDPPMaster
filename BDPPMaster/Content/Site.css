@@ -119,5 +119,10 @@ tr{
     color: white;
 }
 
+
+.addP2__button{
+    display: none;
+}
+
 /* game Options section end */
 
