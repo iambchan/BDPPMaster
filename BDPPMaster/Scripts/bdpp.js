@@ -25,7 +25,7 @@ $(document).ready(function () {
 
     var date = new Date();
     var startDateTimeString = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    $('[name=StartDateTime').val(startDateTimeString);
+    $('[name=StartDateTime]').val(startDateTimeString);
 });
 
 
