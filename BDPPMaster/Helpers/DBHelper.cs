@@ -1,8 +1,10 @@
-﻿using System;
+﻿using BDPPMaster.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace BDPPMaster.Helpers
@@ -11,24 +13,127 @@ namespace BDPPMaster.Helpers
     {
         private static readonly string _bdppmasterdb = ConfigurationManager.ConnectionStrings["bdppmasterdb"].ConnectionString;
 
-        #region CREATE
-        public static Object CreateNewUser(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID)
-        {
-            var query = String.Format(@"INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email, RFID)
-                                        OUTPUT Inserted.PlayerId
-                                        VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}');", 
-                                        FirstName, LastName, ScreenName, BDLoginName, Email, RFID);
-            using (var connection = new SqlConnection(_bdppmasterdb)) {
-                using (var command = new SqlCommand(query, connection)) {
+        #region GET
+        //required, one of: FirstName, LastName, ScreenName, BDLoginName, Email
+        public static Player GetPlayerInfo(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID) {
+            var queryParams = new StringBuilder();
+            #region Append Conditions
+            if (FirstName != null) { queryParams.Append("FirstName = @FirstName"); }
+            if (LastName != null) {
+                if (queryParams.Length > 0) {
+                    queryParams.Append(" AND ");
+                }
+                queryParams.Append("LastName = @LastName");
+            }
+            if (ScreenName != null)
+            {
+                if (queryParams.Length > 0)
+                {
+                    queryParams.Append(" AND ");
+                }
+                queryParams.Append("ScreenName = @ScreenName");
+            }
+            if (BDLoginName != null)
+            {
+                if (queryParams.Length > 0)
+                {
+                    queryParams.Append(" AND ");
+                }
+                queryParams.Append("BDLoginName = @BDLoginName");
+            }
+            if (Email != null)
+            {
+                if (queryParams.Length > 0)
+                {
+                    queryParams.Append(" AND ");
+                }
+                queryParams.Append("Email = @Email");
+            }
+            if (RFID != null)
+            {
+                if (queryParams.Length > 0)
+                {
+                    queryParams.Append(" AND ");
+                }
+                queryParams.Append("RFID = @RFID");
+            }
+            #endregion
+
+            var query = String.Format("SELECT * FROM [Players] WHERE {0};", queryParams.ToString());
+
+            using (var connection = new SqlConnection(_bdppmasterdb))
+            {
+                using (var command = new SqlCommand(query.ToString(), connection))
+                {
                     connection.Open();
-                    using (var reader = command.ExecuteReader()) {
+                    using (var reader = command.ExecuteReader())
+                    {
                         if (!reader.HasRows) { return null; }
                         reader.Read(); //only need the first item
-                        return new Object();
+                        var player = new Player()
+                        {
+                            playerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
+                            firstName = reader["FirstName"].ToString(),
+                            lastName = reader["LastName"].ToString(),
+                            screenName = reader["screenName"].ToString(),
+                            bdLoginName = reader["BDLoginName"].ToString(),
+                            email = reader["Email"].ToString(),
+                            rfid = reader["RFID"].ToString()
+                        };
+
+                        //if (!reader["ProfileImage"].Equals(DBNull.Value)) { 
+                        //    //process image here
+                        //}
+
+                        return player;
                     }
                 }
             }
         }
+        #endregion
+
+        #region CREATE
+        //required, all of: FirstName, LastName, ScreenName, BDLoginName, Email
+        public static Player CreateNewPlayer(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID)
+        {
+
+            var query = @"INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email, RFID)
+                          OUTPUT Inserted.PlayerId
+                          VALUES (@FirstName, @LastName, @ScreenName, @BDLoginName, @Email, @RFID);";
+
+            using (var connection = new SqlConnection(_bdppmasterdb)) {
+                using (var command = new SqlCommand(query, connection)) {
+                    command.Parameters.AddWithValue("@FirstName", FirstName);
+                    command.Parameters.AddWithValue("@LastName", LastName);
+                    command.Parameters.AddWithValue("@ScreenName", ScreenName);
+                    command.Parameters.AddWithValue("@BDLoginName", BDLoginName);
+                    command.Parameters.AddWithValue("@Email", Email);
+                    command.Parameters.AddWithValue("@RFID", RFID);
+                    connection.Open();
+                    using (var reader = command.ExecuteReader()) {
+                        if (!reader.HasRows) { return null; }
+                        reader.Read(); //only need the first item
+                        var player = new Player()
+                        {
+                            playerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
+                            firstName = reader["FirstName"].ToString(),
+                            lastName = reader["LastName"].ToString(),
+                            screenName = reader["screenName"].ToString(),
+                            bdLoginName = reader["BDLoginName"].ToString(),
+                            email = reader["Email"].ToString(),
+                            rfid = reader["RFID"].ToString()
+                        };
+
+                        //if (!reader["ProfileImage"].Equals(DBNull.Value)) { 
+                        //    //process image here
+                        //}
+
+                        return player;
+                    }
+                }
+            }
+        }
+
         #endregion
 
    //     // Set the connection, command, and then execute the command with non query.
