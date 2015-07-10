@@ -277,6 +277,8 @@
     <Content Include="Views\Home\_percentGamesWon.cshtml" />
     <Content Include="Views\Home\_numGamesPlayed.cshtml" />
     <Content Include="Views\Home\_timePlayed.cshtml" />
+    <Content Include="Views\Home\GameOptions.cshtml" />
+    <Content Include="Views\Home\_loginPlayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
