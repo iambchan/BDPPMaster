@@ -194,7 +194,7 @@ namespace BDPPMaster.Controllers
         public ActionResult Hello()
         {
             ViewBag.Message = "fbghfhytyh";
-            PhidgetThing.doPhidgetThings();
+            String id = PhidgetThing.doPhidgetThings();
 
             return View("GameOptions");
         }

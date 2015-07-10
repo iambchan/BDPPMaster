@@ -6,7 +6,9 @@ namespace BDPPMaster.Models
 {
     public static class PhidgetThing
     {
-        public static void doPhidgetThings()
+
+        private static String thisInt;
+        public static String doPhidgetThings()
         {
             try
             {
@@ -18,9 +20,7 @@ namespace BDPPMaster.Models
 
                 rfid.Tag += new TagEventHandler(rfid_Tag);
                 rfid.TagLost += new TagEventHandler(rfid_TagLost);
-                rfid.open();
-                
-        
+                rfid.open();        
                 
                 //Wait for a Phidget RFID to be attached before doing anything with 
                 //the object
@@ -37,10 +37,13 @@ namespace BDPPMaster.Models
                 rfid.close();
                 rfid = null;
 
+                return thisInt;
+
             }
             catch (PhidgetException ex)
             {
                 Console.WriteLine(ex.Description);
+                return "";
             }
         }
 
@@ -68,6 +71,7 @@ namespace BDPPMaster.Models
         static void rfid_Tag(object sender, TagEventArgs e)
         {
             Console.WriteLine("Tag {0} scanned", e.Tag);
+            thisInt = e.Tag;
         }
 
         //print the tag code for the tag that was just lost
