@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using BDPPMaster.Models;
 using BDPPMaster.Helpers;
+using Microsoft.AspNet.SignalR;
+using BDPPMaster.Hubs;
 
 namespace BDPPMaster.Controllers
 {
@@ -185,10 +187,11 @@ namespace BDPPMaster.Controllers
         }
 
         // Todo pass in team ids 
-        public ActionResult ScoreBoard()
-        {
+       // public ActionResult ScoreBoard(int idp1, string imagep1, string namep1, int idp2, string imagep2, string namep2)
+    public ActionResult ScoreBoard()    
+    {
             ViewBag.Message = "ScoreBoard";
-
+            //List<Player> players = new List<Player>(){new Player(){PlayerId = idp1, Avatar = imagep1, ScreenName = namep1}, new Player(){PlayerId = idp2, Avatar = imagep2, ScreenName = namep2}};
             return View();
         }
 [HttpGet]
@@ -204,6 +207,13 @@ namespace BDPPMaster.Controllers
         {
             List<Player> players = DBHelper.GetAllPlayers();
             return View(players);
+        }
+
+        public ActionResult AddPlayer(string rfid)
+        {
+            var context = GlobalHost.ConnectionManager.GetHubContext<PPHub>();
+            context.Clients.All.addPlayer(rfid);
+            return Content("hi cassandra");
         }
 
     }
