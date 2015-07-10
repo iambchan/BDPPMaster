@@ -43,7 +43,7 @@ CREATE TABLE [Teams]
 (
 	TeamId		int IDENTITY(1,1) PRIMARY KEY,
 	Player1_Id	int NOT NULL CONSTRAINT FK_Teams_Players_P1 FOREIGN KEY (Player1_Id) REFERENCES [Players](PlayerId),
-	Player2_Id	int DEFAULT 0 CONSTRAINT FK_Teams_Players_P2 FOREIGN KEY (Player2_Id) REFERENCES [Players](PlayerId)
+	Player2_Id	int DEFAULT NULL CONSTRAINT FK_Teams_Players_P2 FOREIGN KEY (Player2_Id) REFERENCES [Players](PlayerId)
 );
 
 CREATE TABLE [Games]
@@ -58,12 +58,12 @@ CREATE TABLE [Games]
 );
 GO
 
-INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email)
+INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email, RFID)
 VALUES
-('One', 'Guest', 'Guest1', 'bdppGuest1', 'bdppGuest1@bd.com'),
-('Two', 'Guest', 'Guest2', 'bdppGuest2', 'bdppGuest2@bd.com'),
-('Three', 'Guest', 'Guest3', 'bdppGuest3', 'bdppGuest3@bd.com'),
-('Four', 'Guest', 'Guest4', 'bdppGuest4', 'bdppGuest4@bd.com');
+('Jeff', 'Booth', 'JeffB', 'bdppGuest1', 'bdppGuest1@bd.com', '11005b4be0'),
+('Dan', 'Brodie', 'DanB', 'bdppGuest2', 'bdppGuest2@bd.com', '110033b82e'),
+('Tal', 'Ball', 'TalB', 'bdppGuest3', 'bdppGuest3@bd.com', '0107ee6e67'),
+('Dalip', 'Jawanda', 'DalipJ', 'bdppGuest4', 'bdppGuest4@bd.com', '0107ee6809');
 
 INSERT INTO [Teams] (Player1_Id, Player2_Id)
 VALUES
@@ -75,3 +75,17 @@ VALUES
 (1, 2, 15, 14, CURRENT_TIMESTAMP, DATEADD(MINUTE, 10, CURRENT_TIMESTAMP));
 GO
 
+
+INSERT INTO [Teams] (Player1_Id, Player2_Id)
+VALUES (1, 3), (1, 4), (2, 3)
+
+select * from Teams;
+
+INSERT INTO [Games] (Team1_Id, Team2_Id, Team1_score, Team2_score, StartDateTime, EndDateTime)
+VALUES
+(1, 3, 16, 21, CURRENT_TIMESTAMP, DATEADD(MINUTE, 10, CURRENT_TIMESTAMP)),
+(1, 4, 20, 21, CURRENT_TIMESTAMP, DATEADD(MINUTE, 10, CURRENT_TIMESTAMP)),
+(2, 3, 9, 14, CURRENT_TIMESTAMP, DATEADD(MINUTE, 10, CURRENT_TIMESTAMP)),
+(1, 2, 15, 5, CURRENT_TIMESTAMP, DATEADD(MINUTE, 10, CURRENT_TIMESTAMP));
+
+Select * from Games;
