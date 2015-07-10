@@ -4,9 +4,9 @@ using Phidgets.Events;
 
 namespace BDPPMaster.Models
 {
-    public class PhidgetThing
+    public static class PhidgetThing
     {
-        static void Main(string[] args)
+        public static void doPhidgetThings()
         {
             try
             {
@@ -23,16 +23,11 @@ namespace BDPPMaster.Models
 
                 //Wait for a Phidget RFID to be attached before doing anything with 
                 //the object
-                Console.WriteLine("waiting for attachment...");
                 rfid.waitForAttachment();
 
                 //turn on the antenna and the led to show everything is working
                 rfid.Antenna = true;
                 rfid.LED = true;
-
-                //keep waiting and outputting events until keyboard input is entered
-                Console.WriteLine("Press any key to end...");
-                Console.Read();
 
                 //turn off the led
                 rfid.LED = false;
@@ -40,7 +35,6 @@ namespace BDPPMaster.Models
                 //close the phidget and dispose of the object
                 rfid.close();
                 rfid = null;
-                Console.WriteLine("ok");
 
             }
             catch (PhidgetException ex)
