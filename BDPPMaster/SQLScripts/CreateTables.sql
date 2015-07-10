@@ -42,7 +42,7 @@ CREATE TABLE [Teams]
 (
 	TeamId		int IDENTITY(1,1) PRIMARY KEY,
 	Player1_Id	int NOT NULL CONSTRAINT FK_Teams_Players_P1 FOREIGN KEY (Player1_Id) REFERENCES [Players](PlayerId),
-	Player2_Id	int DEFAULT NULL CONSTRAINT FK_Teams_Players_P2 FOREIGN KEY (Player2_Id) REFERENCES [Players](PlayerId)
+	Player2_Id	int DEFAULT 0 CONSTRAINT FK_Teams_Players_P2 FOREIGN KEY (Player2_Id) REFERENCES [Players](PlayerId)
 );
 
 CREATE TABLE [Games]
@@ -50,8 +50,8 @@ CREATE TABLE [Games]
 	GameId			int IDENTITY(1,1) PRIMARY KEY,
 	Team1_Id		int NOT NULL CONSTRAINT FK_Games_Teams_T1 FOREIGN KEY (Team1_Id) REFERENCES [Teams] (TeamId),
 	Team2_Id		int NOT NULL CONSTRAINT FK_Games_Teams_T2 FOREIGN KEY (Team2_Id) REFERENCES [Teams] (TeamId),
-	Team1_score		int NOT NULL DEFAULT 0,
-	Team2_score		int NOT NULL DEFAULT 0,
+	Team1_Score		int NOT NULL DEFAULT 0,
+	Team2_Score		int NOT NULL DEFAULT 0,
 	StartDateTime	DateTime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	EndDateTime		DateTime DEFAULT NULL
 );

@@ -8,22 +8,22 @@ namespace BDPPMaster.Models
 {
     public class Player
     {
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string screenName { get; set; }
-        public string bdLoginName { get; set; }
-        public string email { get; set; }
-        public string rfid { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ScreenName { get; set; }
+        public string BDLoginName { get; set; }
+        public string Email { get; set; }
+        public string RFID { get; set; }
 
-        public int playerId { get; set; }
-        public int gamesWon { get; set; }
-        public int gamesPlayed { get; set; }
-        public TimeSpan timePlayed { get; set; }
+        public int PlayerId { get; set; }
+        public int GamesWon { get; set; }
+        public int GamesPlayed { get; set; }
+        public TimeSpan TimePlayed { get; set; }
 
         //public Image profileImage { get; set; } //if images are stored as bytes in the database
 
-        public double percentWon(){
-            return ((double) gamesWon / gamesPlayed);
+        public double PercentWon(){
+            return ((double) GamesWon / GamesPlayed);
     }
 
     }

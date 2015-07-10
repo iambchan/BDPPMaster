@@ -1,0 +1,24 @@
+﻿@model  List<BDPPMaster.Models.Player>
+@{
+    ViewBag.Title = "Percent Games Won";
+}
+
+@{
+    List<BDPPMaster.Models.Player> players = Model.OrderByDescending(o => o.percentWon()).ToList();
+}
+<table class="table table-bordered table-striped">
+    <tr>
+        <td>User</td>
+        <td>Games Won</td>
+    </tr>
+
+    @foreach (var player in players)
+    {
+        <tr>
+            <td>@player.screenName</td>
+            <td>@player.percentWon()</td>
+        </tr>
+    }
+
+
+</table>
