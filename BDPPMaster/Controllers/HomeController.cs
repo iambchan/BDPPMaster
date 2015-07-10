@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BDPPMaster.Models;
 
 namespace BDPPMaster.Controllers
 {
@@ -23,10 +24,149 @@ namespace BDPPMaster.Controllers
         public ActionResult Rankings()
         {
             ViewBag.Message = "Rankings";
+            //get users from db
+
+
+
 
             return View();
         }
+        [ChildActionOnly]
+        public ActionResult mostGamesWon()
+        {
+            //
+            // var model = repository.GetThingByParameter(parameter1);
+            // var partialViewModel = new PartialViewModel(model);
 
+            List<Player> players = new List<Player>();
+
+            Player p1 = new Player();
+            p1.screenName = "p1";
+            p1.gamesPlayed = 10;
+            p1.gamesWon = 7;
+
+            Player p2 = new Player();
+            p2.screenName = "p2";
+            p2.gamesPlayed = 12;
+            p2.gamesWon = 7;
+            Player p3 = new Player();
+            p3.screenName = "p3";
+            p3.gamesPlayed = 0;
+            p3.gamesWon = 7;
+
+            Player p4 = new Player();
+            p4.screenName = "p4";
+            p4.gamesPlayed = 13;
+            p4.gamesWon = 7;
+
+            players.Add(p1);
+            players.Add(p2);
+            players.Add(p3);
+            players.Add(p4);
+            return PartialView("_mostGamesWon", players);
+        }
+        [ChildActionOnly]
+        public ActionResult percentGamesWon()
+        {
+            //
+            // var model = repository.GetThingByParameter(parameter1);
+            // var partialViewModel = new PartialViewModel(model);
+
+            List<Player> players = new List<Player>();
+
+            Player p1 = new Player();
+            p1.screenName = "p1";
+            p1.gamesPlayed = 10;
+            p1.gamesWon = 7;
+
+            Player p2 = new Player();
+            p2.screenName = "p2";
+            p2.gamesPlayed = 12;
+            p2.gamesWon = 7;
+            Player p3 = new Player();
+            p3.screenName = "p3";
+            p3.gamesPlayed = 0;
+            p3.gamesWon = 7;
+
+            Player p4 = new Player();
+            p4.screenName = "p4";
+            p4.gamesPlayed = 13;
+            p4.gamesWon = 7;
+
+            players.Add(p1);
+            players.Add(p2);
+            players.Add(p3);
+            players.Add(p4);
+            return PartialView("_percentGamesWon", players);
+        }
+        [ChildActionOnly]
+        public ActionResult numGamesPlayed()
+        {
+            //
+            // var model = repository.GetThingByParameter(parameter1);
+            // var partialViewModel = new PartialViewModel(model);
+
+            List<Player> players = new List<Player>();
+
+            Player p1 = new Player();
+            p1.screenName = "p1";
+            p1.gamesPlayed = 10;
+            p1.gamesWon = 7;
+
+            Player p2 = new Player();
+            p2.screenName = "p2";
+            p2.gamesPlayed = 12;
+            p2.gamesWon = 7;
+            Player p3 = new Player();
+            p3.screenName = "p3";
+            p3.gamesPlayed = 0;
+            p3.gamesWon = 7;
+
+            Player p4 = new Player();
+            p4.screenName = "p4";
+            p4.gamesPlayed = 13;
+            p4.gamesWon = 7;
+
+            players.Add(p1);
+            players.Add(p2);
+            players.Add(p3);
+            players.Add(p4);
+            return PartialView("_numGamesPlayed", players);
+        }
+        [ChildActionOnly]
+        public ActionResult timePlayed()
+        {
+            //
+            // var model = repository.GetThingByParameter(parameter1);
+            // var partialViewModel = new PartialViewModel(model);
+
+            List<Player> players = new List<Player>();
+
+            Player p1 = new Player();
+            p1.screenName = "p1";
+            p1.gamesPlayed = 10;
+            p1.gamesWon = 7;
+
+            Player p2 = new Player();
+            p2.screenName = "p2";
+            p2.gamesPlayed = 12;
+            p2.gamesWon = 7;
+            Player p3 = new Player();
+            p3.screenName = "p3";
+            p3.gamesPlayed = 0;
+            p3.gamesWon = 7;
+
+            Player p4 = new Player();
+            p4.screenName = "p4";
+            p4.gamesPlayed = 13;
+            p4.gamesWon = 7;
+
+            players.Add(p1);
+            players.Add(p2);
+            players.Add(p3);
+            players.Add(p4);
+            return PartialView("_timePlayed", players);
+        }
         public ActionResult PlayerBoard()
         {
             ViewBag.Message = "Player Board";
