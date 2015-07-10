@@ -1,8 +1,8 @@
 ﻿@model BDPPMaster.Models.Player
 
-<div class="col-xs-3 loginPlayer center" style="display: none" data-player-id="@Model.PlayerId">
+<div class="col-xs-3 loginPlayer center" style="display: none" data-player-id="@Model.PlayerId" data-player-rfid="@Model.RFID">
     <img class="profileImage" src="@Url.Content("~/Content/images/" + @Model.Avatar)" /><br />
     <div class="screenName">@Model.ScreenName</div>
     @*<button data-playerId="@Model.PlayerId" data-avatar="@Model.Avatar" data-username="@Model.ScreenName" class="addP1__button">Add as Player 1</button>
-    <button data-playerid="@Model.PlayerId" data-avatar="@Model.Avatar" data-username="@Model.ScreenName" class ="addP2__button">Add as Player 2</button>*@
+        <button data-playerid="@Model.PlayerId" data-avatar="@Model.Avatar" data-username="@Model.ScreenName" class ="addP2__button">Add as Player 2</button>*@
 </div>

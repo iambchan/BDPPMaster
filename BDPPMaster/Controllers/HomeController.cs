@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using BDPPMaster.Models;
 using BDPPMaster.Helpers;
+using Microsoft.AspNet.SignalR;
+using BDPPMaster.Hubs;
 
 namespace BDPPMaster.Controllers
 {
@@ -209,7 +211,8 @@ namespace BDPPMaster.Controllers
 
         public ActionResult AddPlayer(string rfid)
         {
-
+            var context = GlobalHost.ConnectionManager.GetHubContext<PPHub>();
+            context.Clients.All.addPlayer(rfid);
             return Content("hi cassandra");
         }
 
