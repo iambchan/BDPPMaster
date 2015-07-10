@@ -48,11 +48,19 @@ namespace BDPPMaster.Controllers
 
             return View();
         }
-
-        public ActionResult GameOptions()
+[HttpGet]
+        public ActionResult Hello()
         {
             ViewBag.Message = "fbghfhytyh";
             PhidgetThing.doPhidgetThings();
+
+            return View("GameOptions");
+        }
+        
+        public ActionResult GameOptions()
+        {
+            ViewBag.Message = "fbghfhytyh";
+           // PhidgetThing.doPhidgetThings();
 
             return View();
         }

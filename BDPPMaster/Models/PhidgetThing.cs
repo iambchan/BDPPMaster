@@ -1,4 +1,5 @@
 ﻿using System;
+using Phidget21COM;
 using Phidgets;
 using Phidgets.Events;
 
@@ -11,7 +12,6 @@ namespace BDPPMaster.Models
             try
             {
                 RFID rfid = new RFID(); //Declare an RFID object
-
                 //initialize our Phidgets RFID reader and hook the event handlers
                 rfid.Attach += new AttachEventHandler(rfid_Attach);
                 rfid.Detach += new DetachEventHandler(rfid_Detach);
@@ -20,12 +20,14 @@ namespace BDPPMaster.Models
                 rfid.Tag += new TagEventHandler(rfid_Tag);
                 rfid.TagLost += new TagEventHandler(rfid_TagLost);
                 rfid.open();
-
+                
+        
+                
                 //Wait for a Phidget RFID to be attached before doing anything with 
                 //the object
                 rfid.waitForAttachment();
 
-                //turn on the antenna and the led to show everything is working
+                ////turn on the antenna and the led to show everything is working
                 rfid.Antenna = true;
                 rfid.LED = true;
 

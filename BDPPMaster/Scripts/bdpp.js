@@ -4,3 +4,18 @@
     })
 
 );
+
+function helloClicked() {
+
+    $.ajax({
+        url: '/Home/Hello',
+        dataType: 'html',
+        type: 'get',
+        success: function (data, textStatus, jQxhr) {
+           
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+           
+        }
+    });
+}
