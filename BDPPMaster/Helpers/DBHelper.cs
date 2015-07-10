@@ -277,7 +277,7 @@ namespace BDPPMaster.Helpers
                         if (!reader.HasRows) { return null; }
                         while (reader.Read())
                         {
-                            playerIds.Add(reader.GetInt32.reader.GetOrdinal("PlayerId"));
+                            playerIds.Add(reader.GetInt32(reader.GetOrdinal("PlayerId")));
                         }
                         return playerIds;
                     }
