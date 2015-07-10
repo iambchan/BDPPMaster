@@ -34,11 +34,20 @@ namespace BDPPMaster.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult GameSetup()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Game setup";
 
             return View();
         }
+
+        public ActionResult ScoreBoard()
+        {
+            ViewBag.Message = "ScoreBoard";
+
+            return View();
+        }
+
+
     }
 }
