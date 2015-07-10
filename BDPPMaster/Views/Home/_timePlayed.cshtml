@@ -1,22 +1,23 @@
 ﻿@model  List<BDPPMaster.Models.Player>
 @{
-    ViewBag.Title = "Number of Games PLyed";
+    ViewBag.Title = "Total Time Played";
 }
 
 @{
-    List<BDPPMaster.Models.Player> players = Model.OrderByDescending(o => o.timePlayed).ToList();
+    List<BDPPMaster.Models.Player> players = Model.OrderByDescending(o => o.TimePlayed).ToList();
 }
+<h3>@ViewBag.Title</h3>
 <table class="table table-bordered table-striped">
     <tr>
         <td>User</td>
-        <td>Games Won</td>
+        <td>Total Time Played</td>
     </tr>
 
     @foreach (var player in players)
     {
         <tr>
-            <td>@player.screenName</td>
-            <td>@player.timePlayed</td>
+            <td>@player.ScreenName</td>
+            <td>@player.TimePlayed</td>
         </tr>
     }
 

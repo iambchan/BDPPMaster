@@ -144,7 +144,6 @@ namespace BDPPMaster.Controllers
             // var partialViewModel = new PartialViewModel(model);
 
             List<Player> players = new List<Player>();
-
             Player p1 = new Player();
             p1.ScreenName = "p1";
             p1.GamesPlayed = 10;
