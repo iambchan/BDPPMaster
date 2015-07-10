@@ -8,6 +8,8 @@ Select * from Teams;
 SELECT * FROM [Players] WHERE FirstName LIKE '%One%' OR LastName LIKE '%Guest%' OR ScreenName LIKE '%Guest%' OR BDLoginName LIKE '%Guest%' OR Email Like '%%' OR RFID LIKE '%%';
 SELECT * FROM [Players] WHERE ScreenName = 'Guest1' OR BDLoginName = 'bdppGuest1';
 
+SELECT * FROM [Players] ORDER BY PlayerId;
+
 --create new player & return player
 INSERT INTO [Players] (FirstName, LastName, ScreenName, BDLoginName, Email, RFID)
 Output Inserted.*
@@ -60,6 +62,11 @@ VALUES (1, 2, CURRENT_TIMESTAMP);
 SELECT * FROM [Players] p
 INNER JOIN [Teams] t ON p.PlayerId IN (t.Player1_id, t.Player2_id)
 INNER JOIN [Games] g ON t.TeamId IN (g.Team1_id, g.Team2_id);
+
+SELECT * FROM [Games] G
+INNER JOIN [Teams] t ON t.TeamId IN (g.Team1_id, g.Team2_id)
+INNER JOIN [Players] P ON p.PlayerId IN (t.Player1_id, t.Player2_id)
+WHERE g.GameId = 1;
 
 SELECT t.TeamId, p.* 
 FROM [Teams] t

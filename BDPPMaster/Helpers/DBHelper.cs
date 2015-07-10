@@ -29,6 +29,36 @@ namespace BDPPMaster.Helpers
                 }
             }
         }
+        public static List<Player> GetAllPlayers() {
+            var players = new List<Player>();
+            var query = String.Format("SELECT * FROM [Players] ORDER BY PlayerId;");
+            using (var connection = new SqlConnection(_bdppmasterdb))
+            {
+                using (var command = new SqlCommand(query.ToString(), connection))
+                {
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (!reader.HasRows) { return null; }
+                        while (reader.Read())
+                        {
+                            players.Add(new Player()
+                            {
+                                PlayerId = reader.GetInt32(reader.GetOrdinal("PlayerId")),
+                                FirstName = reader["FirstName"].ToString(),
+                                LastName = reader["LastName"].ToString(),
+                                ScreenName = reader["screenName"].ToString(),
+                                BDLoginName = reader["BDLoginName"].ToString(),
+                                Email = reader["Email"].ToString(),
+                                RFID = reader["RFID"].ToString(),
+                                ImageNameWithExt = reader["ImageNameWithExt"].ToString()
+                            });
+                        }
+                        return players;
+                    }
+                }
+            }
+        }
         public static Player GetPlayerInfo(string FirstName, string LastName, string ScreenName, string BDLoginName, string Email, string RFID) {
             var queryParams = new StringBuilder();
             #region Append Conditions
@@ -268,7 +298,7 @@ namespace BDPPMaster.Helpers
         }
         #endregion
 
-   //     // Set the connection, command, and then execute the command with non query.
+        //     // Set the connection, command, and then execute the command with non query.
    //   public static Int32 ExecuteNonQuery(String connectionString, String commandText,
    //       CommandType commandType, params SqlParameter[] parameters) {
    //      using (SqlConnection conn = new SqlConnection(connectionString)) {
